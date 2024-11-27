@@ -1,0 +1,30 @@
+/* Wave Animation for EEG signal-like effect */
+@keyframes waveAnimation {
+    0% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  .bg-wave-animation {
+    background: linear-gradient(90deg, #00d4ff 20%, #ff00a1 40%, #00d4ff 60%, #ff00a1 80%);
+    background-size: 200% 100%;
+    animation: waveAnimation 4s linear infinite;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+  }
+  
+  /* Optional - Dark background for contrast */
+  .bg-dark {
+    background-color: #1e293b;
+  }
+  

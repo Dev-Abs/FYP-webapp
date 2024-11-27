@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-signal {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10%" height="10%" viewBox="0 0 100 10"><path fill="none" stroke="%23000" stroke-width="1" d="M0,5 Q 10,0 20,5 Q 30,10 40,5 Q 50,0 6s0,5 Q 70,10 80,5 Q 90,0 100,5" /></svg>');
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    animation: wave 8s linear infinite;
+    background-size: cover;
+  }
+  
+  @keyframes wave {
+    0% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: -100% 0;
+    }
+  }
+  
+  
+  
+  
