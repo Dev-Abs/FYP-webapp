@@ -22,6 +22,16 @@
       background-position: -100% 0;
     }
   }
+
+  /* In your global CSS */
+body {
+  @apply transition-colors duration-200;
+}
+
+/* For smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
   
   
   

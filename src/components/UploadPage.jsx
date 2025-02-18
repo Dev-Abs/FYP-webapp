@@ -1,53 +1,113 @@
 'use client'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 
-export default function UploadPage() {
+export default function UploadPage({ addToHistory }) {
   const [file, setFile] = useState(null)
   const [uploadStatus, setUploadStatus] = useState('')
+  const [prediction, setPrediction] = useState(null)
   const [progress, setProgress] = useState(0)
+  const navigate = useNavigate()
 
   const handleFileChange = (event) => {
     const uploadedFile = event.target.files[0]
-    const validFormats = ['text/csv', 'application/matlab']
+    const validExtension = uploadedFile?.name?.split('.').pop().toLowerCase() === 'edf'
 
-    if (uploadedFile && validFormats.includes(uploadedFile.type)) {
+    if (uploadedFile && validExtension) {
       setFile(uploadedFile)
       setUploadStatus('')
+      setPrediction(null)
     } else {
-      setUploadStatus('Unsupported file format. Please upload .csv or .mat files.')
+      setUploadStatus('Please upload a .edf file')
       setFile(null)
+      setPrediction(null)
     }
   }
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
     if (!file) {
-      setUploadStatus('No file selected. Please upload a file.')
+      setUploadStatus('No file selected')
       return
     }
 
-    setUploadStatus('Uploading...')
-    setProgress(50)
+    try {
+      setUploadStatus('Uploading and analyzing...')
+      setProgress(50)
 
-    setTimeout(() => {
-      setUploadStatus('Upload successful! File ready for analysis.')
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const response = await fetch('http://localhost:5000/predict', {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Analysis failed')
+      }
+
+      const result = await response.json()
+      
+      // Update progress and status
       setProgress(100)
-    }, 2000)
+      setUploadStatus('Analysis complete! Redirecting to results...')
+      setPrediction(result.prediction)
+
+      // Add to history
+      // addToHistory({
+      //   date: new Date().toLocaleDateString('en-US', {
+      //     year: 'numeric',
+      //     month: 'long',
+      //     day: 'numeric',
+      //     hour: '2-digit',
+      //     minute: '2-digit'
+      //   }),
+      //   filename: file.name,
+      //   results: result.prediction,
+      //   status: result.prediction.some(p => p > 0.5) ? 'Abnormal' : 'Normal'
+      // })
+      addToHistory({
+        date: new Date().toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        }),
+        filename: file.name,
+        results: result.prediction,
+        status: result.prediction.some(p => p > 0.5) ? 'Depressed' : 'Normal',
+        modelVersion: '1.0.0' // Add any additional metadata
+      });
+
+      // Redirect after 2 seconds
+      setTimeout(() => {
+        navigate('/results')
+      }, 2000)
+
+    } catch (error) {
+      setProgress(0)
+      setUploadStatus(error.message || 'Error processing file')
+      setPrediction(null)
+      console.error('Upload Error:', error)
+    }
   }
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-8 px-4">
       <motion.div
-        className="text-center mb-8"
+        className="text-center mb-8 mr-10"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
         <h1 className="text-4xl font-bold text-primary">
-          Upload Your EEG Data for Analysis
+          EEG Signal Analysis
         </h1>
         <p className="text-gray-600 mt-2">
-          Drag & Drop or Click to Upload (.csv, .mat)
+          Upload your EDF file for seizure detection analysis
         </p>
       </motion.div>
 
@@ -62,6 +122,7 @@ export default function UploadPage() {
             type="file"
             className="hidden"
             id="file-upload"
+            accept=".edf"
             onChange={handleFileChange}
           />
           <label
@@ -79,38 +140,36 @@ export default function UploadPage() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                d="M7 16a4 4 0 01-4-4V8a4 4 0 014-4h10a4 4 0 014 4v4a4 4 0 01-4 4H7z"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
               />
             </svg>
             <span className="mt-2 text-sm font-medium">
-              Drag & Drop or Click to Upload
+              Click to upload EDF file
             </span>
           </label>
         </div>
 
         {file && (
           <div className="mt-4 text-center text-green-600">
-            File selected: {file.name}
+            Selected: {file.name}
           </div>
         )}
 
         {uploadStatus && (
-          <div
-            className={`mt-4 text-center ${
-              uploadStatus.includes('successful')
-                ? 'text-green-600'
-                : 'text-red-600'
-            }`}
-          >
+          <div className={`mt-4 text-center ${
+            uploadStatus.includes('complete') ? 'text-green-600' : 
+            uploadStatus.includes('failed') ? 'text-red-600' : 'text-blue-600'
+          }`}>
             {uploadStatus}
           </div>
         )}
 
         <button
           onClick={handleUpload}
-          className="mt-6 w-full bg-primary text-white py-2 px-4 rounded-lg shadow-md hover:bg-primary-dark transition"
+          disabled={!file}
+          className="mt-6 w-full bg-primary text-white py-2 px-4 rounded-lg shadow-md hover:bg-primary-dark transition disabled:opacity-50"
         >
-          {progress < 100 ? 'Upload' : 'Process File'}
+          {progress < 100 ? 'Analyze EEG Data' : 'View Results'}
         </button>
 
         {progress > 0 && (
@@ -121,6 +180,41 @@ export default function UploadPage() {
             transition={{ duration: 0.6 }}
           >
             <div className="h-full bg-indigo-600" />
+          </motion.div>
+        )}
+
+        {prediction && (
+          <motion.div
+            className="mt-6 p-4 bg-gray-50 rounded-lg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            <h3 className="text-lg font-semibold mb-2">Preliminary Results:</h3>
+            <div className="space-y-2">
+              {Array.isArray(prediction) ? (
+                prediction.map((value, index) => (
+                  <div key={index} className="flex justify-between">
+                    <span>Time segment {index + 1}:</span>
+                    <span className={value > 0.5 ? 'text-red-600' : 'text-green-600'}>
+                      {value.toFixed(2)} ({value > 0.5 ? 'Depression Detected' : 'Normal'})
+                    </span>
+                  </div>
+                ))
+              ) : (
+                <div className="text-center">
+                  {typeof prediction === 'object' ? (
+                    Object.entries(prediction).map(([key, value]) => (
+                      <div key={key} className="flex justify-between">
+                        <span>{key}:</span>
+                        <span className={value > 0.5 ? 'text-red-600' : 'text-green-600'}>
+                          {typeof value === 'number' ? value.toFixed(2) : value}
+                        </span>
+                      </div>
+                    ))
+                  ) : prediction}
+                </div>
+              )}
+            </div>
           </motion.div>
         )}
       </motion.div>
