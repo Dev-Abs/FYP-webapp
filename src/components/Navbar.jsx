@@ -1,6 +1,8 @@
+
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { AnimatedTabs } from "./AnimatedTabs";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,34 +29,34 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className="bg-white dark:bg-gray-800 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600"
+      className="bg-gray-800 fixed w-full z-20 top-0 start-0 border-b  border-gray-200 dark:border-gray-600"
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-around mx-auto p-4  ">
         {/* Logo */}
         {/* <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <span className="text-2xl font-semibold dark:text-white">NeuroCare</span>
         </Link> */}
-        <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+        {/* <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse ">
         <img src="/logoo.png"
           className="h-14 w-24"
           alt="" />
-        </Link>
+        </Link> */}
 
         {/* Hamburger Button */}
-        <div className="flex items-center md:order-2">
+        {/* <div className="flex items-center md:order-2">
           <motion.button
             className="rounded-2xl border-2 border-dashed hidden md:block border-blue-700 bg-primary px-4 py-2 font-semibold uppercase text-white transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-lg dark:bg-primary dark:hover:bg-indigo-800"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             Get Started
-          </motion.button>
+          </motion.button> */}
 
           {/* Hamburger Icon */}
-          <motion.button
+          {/* <motion.button
             ref={buttonRef} 
             onClick={toggleMenu}
             className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-400"
@@ -95,10 +97,10 @@ const Navbar = () => {
               </svg>
             )}
           </motion.button>
-        </div>
+        </div> */}
 
         {/* Navigation Links */}
-        <AnimatePresence>
+        {/* <AnimatePresence>
           {isMenuOpen && (
             <motion.div
               ref={menuRef} 
@@ -116,34 +118,56 @@ const Navbar = () => {
                     className="block py-2 px-3 rounded md:p-0"
                     whileHover={{ scale: 1.05 }}
                   >
-                    <Link
-                      to={`/${item.replace(" ", "").toLowerCase()}`}
-                      className="text-gray-900 dark:text-white hover:text-blue-700 dark:hover:text-indigo-300"
-                    >
-                      {item}
-                    </Link>
+                    {item === "Home" ? (
+                      <Link
+                        to="/"
+                        className="text-gray-900 dark:text-white hover:text-blue-700 dark:hover:text-indigo-300"
+                      >
+                        {item}
+                      </Link>
+                    ) : (
+                      <Link
+                        to={`/${item.replace(" ", "").toLowerCase()}`}
+                        className="text-gray-900 dark:text-white hover:text-blue-700 dark:hover:text-indigo-300"
+                      >
+                        {item}
+                      </Link>
+                    )}
                   </motion.li>
                 ))}
               </ul>
             </motion.div>
           )}
-        </AnimatePresence>
-        <ul className="md:flex hidden p-4 md:flex-row md:space-x-8 bg-gray-50 dark:bg-gray-800 rounded-lg md:bg-transparent">
+        </AnimatePresence> */}
+        <AnimatedTabs items={["Home", "Upload EEG", "Results", "About"]} />
+        
+        {/* <ul className="md:flex hidden p-4 md:flex-row md:space-x-8 bg-gray-50 dark:bg-gray-800 rounded-lg md:bg-transparent">
                 {["Home", "Upload EEG", "Results", "About"].map((item, index) => (
                   <motion.li
                     key={index}
                     className="block py-2 px-3 rounded md:p-0"
                     whileHover={{ scale: 1.05 }}
                   >
-                    <Link
-                      to={`/${item.replace(" ", "").toLowerCase()}`}
-                      className="text-gray-900 dark:text-white hover:text-blue-700 dark:hover:text-indigo-300"
-                    >
-                      {item}
-                    </Link>
+                    {
+                      item === "Home" ? (
+                        <Link
+                          to="/"
+                          className="text-gray-900 dark:text-white hover:text-blue-700 dark:hover:text-indigo-300"
+                        >
+                          {item}
+                        </Link>
+                      ) : (
+                        <Link
+                          to={`/${item.replace(" ", "").toLowerCase()}`}
+                          className="text-gray-900 dark:text-white hover:text-blue-700 dark:hover:text-indigo-300"
+                        >
+                          {item}
+                        </Link>
+                      )
+                    }
                   </motion.li>
                 ))}
-              </ul>
+              </ul> */}
       </div>
     </motion.nav>
   );

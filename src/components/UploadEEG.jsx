@@ -49,7 +49,7 @@ const EncryptButton = () => {
       whileTap={{ scale: 0.975 }}
       onMouseEnter={scramble}
       onMouseLeave={stopScramble}
-      className="group relative overflow-hidden rounded-lg border-[1px] border-primary bg-primary px-4 py-2 font-mono font-medium uppercase text-white transition-colors hover:bg-primary-dark"
+      className="group relative overflow-hidden rounded-lg border-[1px] border-primary bg-white px-4 py-2 font-mono font-medium uppercase text-black hover:text-white transition-colors hover:bg-primary-dark"
     >
       <Link
       to='/uploadeeg'

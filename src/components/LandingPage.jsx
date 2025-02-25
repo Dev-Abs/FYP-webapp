@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
+import './FeatureCards'
 
 // --- Icons (must be declared before they're used) ---
 const BrainIcon = () => (
@@ -164,7 +165,8 @@ const LandingPage = () => {
         </div>
 
         {/* Features Grid */}
-        <motion.div
+        <FeatureCards />
+        {/* <motion.div
           className="mt-20 grid md:grid-cols-3 gap-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -183,7 +185,7 @@ const LandingPage = () => {
               <p className="text-gray-600">{feature.description}</p>
             </motion.div>
           ))}
-        </motion.div>
+        </motion.div> */}
 
         {/* Animated Stats */}
         <motion.div
