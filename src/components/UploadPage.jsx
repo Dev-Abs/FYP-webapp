@@ -318,7 +318,7 @@ export default function UploadPage({ addToHistory }) {
       <NavbarDrawer />
     <div className="min-h-screen bg-gray-900 flex items-center justify-center py-8 px-4 md:flex-row flex-col">
       <motion.div
-        className="text-center mb-8 mr-10"
+        className="text-center mb-8 md:mr-10"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
