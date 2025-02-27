@@ -174,7 +174,6 @@
 // };
 
 // export default Navbar;
-// Navbar.jsx
 import React from "react";
 import { motion } from "framer-motion";
 import { AnimatedTabs } from "./AnimatedTabs";
@@ -188,7 +187,16 @@ const Navbar = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="max-w-screen-xl flex flex-wrap items-center justify-around mx-auto p-4">
-        <AnimatedTabs items={["Main", "Home", "Upload EEG", "Results", "About", "We Care"]} />
+        <AnimatedTabs
+          items={[
+            "Main",
+            "Home",
+            "Upload EEG",
+            "Results",
+            "About",
+            "We Care",
+          ]}
+        />
       </div>
     </motion.nav>
   );
