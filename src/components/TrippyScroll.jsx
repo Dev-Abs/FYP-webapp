@@ -21,7 +21,7 @@ const TrippyScroll = () => {
         const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
           method: 'POST',
           headers: {
-            Authorization: `Bearer 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`,
+            Authorization: `Bearer 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`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({

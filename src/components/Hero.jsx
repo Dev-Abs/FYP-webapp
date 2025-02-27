@@ -169,14 +169,14 @@ import ParticleRing from "./ParticleRing";
 
 const Hero = () => {
   return (
-    <section className="w-full px-8 py-12 mt-20 grid grid-cols-1 md:grid-cols-2 items-center gap-8 mx-auto relative overflow-hidden bg-gray-900 min-h-screen">
+    <section className="w-full px-8 py-12 grid grid-cols-1 md:grid-cols-2 items-center gap-8 mx-auto relative overflow-hidden bg-gray-900 min-h-screen">
       {/* Particle Background */}
       <div className="absolute inset-0 z-0">
         <ParticleRing />
       </div>
 
       {/* Hero Text */}
-      <div className="relative z-10 ml-20">
+      <div className="relative z-10 md:ml-20">
         <motion.span 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -321,7 +321,7 @@ const ShuffleGrid = () => {
   };
 
   return (
-    <div className="grid grid-cols-4 grid-rows-4 h-[450px] gap-1 mr-20 bg-gray-800 rounded-xl p-2 shadow-2xl">
+    <div className="grid grid-cols-4 grid-rows-4 h-[450px] gap-1 md:mr-20 bg-gray-800 rounded-xl p-2 shadow-2xl">
       {squares.map((sq) => sq)}
     </div>
   );

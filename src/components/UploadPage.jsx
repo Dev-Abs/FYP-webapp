@@ -226,6 +226,8 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+import Navbar from './Navbar'
+import NavbarDrawer from './NavbarDrawer'
 
 export default function UploadPage({ addToHistory }) {
   const [file, setFile] = useState(null)
@@ -262,8 +264,8 @@ export default function UploadPage({ addToHistory }) {
       const formData = new FormData()
       formData.append('file', file)
   
-      // const response = await fetch(`${import.meta.env.VITE_API_URL}/predict`, {
-      const response = await fetch(`http://localhost:5000/predict`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/predict`, {
+      // const response = await fetch(`http://localhost:5000/predict`, {
         method: 'POST',
         body: formData
       })
@@ -311,7 +313,10 @@ export default function UploadPage({ addToHistory }) {
   
 
   return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center py-8 px-4">
+    <div>
+      {/* <Navbar /> */}
+      <NavbarDrawer />
+    <div className="min-h-screen bg-gray-900 flex items-center justify-center py-8 px-4 md:flex-row flex-col">
       <motion.div
         className="text-center mb-8 mr-10"
         initial={{ opacity: 0, y: 50 }}
@@ -433,6 +438,7 @@ export default function UploadPage({ addToHistory }) {
           </motion.div>
         )}
       </motion.div>
+    </div>
     </div>
   )
 }

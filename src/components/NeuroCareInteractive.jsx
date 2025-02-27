@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useAnimate } from "framer-motion";
+import Navbar from "./Navbar";
+import NavbarDrawer from "./NavbarDrawer";
 
 const motivationalWords = [
   "Inspire",
@@ -32,65 +34,13 @@ const motivationalWords = [
 const DELAY_IN_MS = 3000;
 const TRANSITION_DURATION_IN_SECS = 0.8;
 
+// Module-level cache variable to persist across navigations.
+let cachedStatements = null;
+
 const NeuroCareInteractive = () => {
-  // const [motivationalWords, setMotivationalWords] = useState([])
-  // useEffect(() => {
-  //   const fetchMotivationalWords = async () => {
-  //     try
-  //     {
-  //       // fetch motivational words from the API by making a new request
-  //       // and updating the motivationalWords state
-  //       const responseMotivationalWords = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-  //         method: "POST",
-  //         headers: {
-  //           Authorization: `Bearer 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`,
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           model: "openai/gpt-3.5-turbo",
-  //           temperature: 0.7,
-  //           max_tokens: 500,
-  //           messages: [
-  //             {
-  //               role: "user",
-  //               content:
-  //                 "Generate 25 motivational words for mental health and well-being. give only single words.",
-  //             },
-  //           ],
-  //         }),
-  //       });
-
-  //       const dataMotivationalWords = await responseMotivationalWords.json();
-  //       if (!responseMotivationalWords.ok) {
-  //         throw new Error(dataMotivationalWords.error?.message || "API request failed");
-  //       }
-
-  //       const contentMotivationalWords = dataMotivationalWords.choices[0].message.content;
-
-  //       const motivationalWordsArray = contentMotivationalWords
-  //         .split("\n")
-  //         .filter((line) => line.trim())
-  //         .map((line) => line.trim())
-  //         .slice(0, 25);
-
-  //       if (motivationalWordsArray.length < 25) {
-  //         throw new Error("Received insufficient number of motivational words");
-  //       }
-
-  //       setMotivationalWords(motivationalWordsArray);
-  //     }
-  //     catch (err)
-  //     {
-  //       console.error("API Error:", err);
-  //     }
-  //     fetchMotivationalWords()
-  //   }
-  // },[])
   return (
     <div className="relative overflow-hidden bg-gray-900 min-h-screen">
       <MouseWordTrail words={motivationalWords} renderImageBuffer={50} rotationRange={25}>
-        {/* The rotating card area gets a special class "no-mouse-trail"
-            so that the mouse trail effect won’t trigger when hovered over it */}
         <div className="relative z-10 flex h-screen items-center justify-center">
           <NeuroCareRotatingStatements />
         </div>
@@ -100,17 +50,33 @@ const NeuroCareInteractive = () => {
 };
 
 const NeuroCareRotatingStatements = () => {
-  const [statements, setStatements] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // Try to load from the module-level cache first, then sessionStorage, then default to empty.
+  const [statements, setStatements] = useState(() => {
+    if (cachedStatements) return cachedStatements;
+    try {
+      const stored = sessionStorage.getItem("statements");
+      if (stored) {
+        cachedStatements = JSON.parse(stored);
+        return cachedStatements;
+      }
+    } catch (err) {
+      console.error("Session storage error:", err);
+    }
+    return [];
+  });
+  const [loading, setLoading] = useState(statements.length === 0);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // If we already have statements, do nothing.
+    if (statements.length > 0) return;
+
     const fetchStatements = async () => {
       try {
         const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
           method: "POST",
           headers: {
-            Authorization: `Bearer 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`,
+            Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
@@ -143,8 +109,10 @@ const NeuroCareRotatingStatements = () => {
           throw new Error("Received insufficient number of statements");
         }
 
+        // Cache in both module-level variable and sessionStorage.
+        cachedStatements = statementsArray;
+        sessionStorage.setItem("statements", JSON.stringify(statementsArray));
         setStatements(statementsArray);
-        
       } catch (err) {
         setError(err.message);
         console.error("API Error:", err);
@@ -154,7 +122,7 @@ const NeuroCareRotatingStatements = () => {
     };
 
     fetchStatements();
-  }, []);
+  }, [statements]);
 
   if (loading)
     return (
@@ -194,6 +162,9 @@ const FlippingCard = ({ items }) => {
   };
 
   return (
+    <div>
+      {/* <Navbar /> */}
+      <NavbarDrawer />
     <div className="relative w-full max-w-md no-mouse-trail">
       <AnimatePresence mode="wait">
         <motion.div
@@ -209,11 +180,9 @@ const FlippingCard = ({ items }) => {
           <p className="text-xl font-semibold text-gray-800">
             {items[index % items.length]}
           </p>
-          {/* <div className="mt-4 text-sm text-gray-500">
-            {((index % items.length) + 1)}/{items.length}
-          </div> */}
         </motion.div>
       </AnimatePresence>
+    </div>
     </div>
   );
 };
@@ -224,9 +193,7 @@ const MouseWordTrail = ({ children, words, renderImageBuffer, rotationRange }) =
   const wordRenderCount = useRef(0);
 
   const handleMouseMove = (e) => {
-    // Skip the effect if the mouse is over an element with "no-mouse-trail"
     if (e.target.closest(".no-mouse-trail")) return;
-
     const { clientX, clientY } = e;
     const distance = calculateDistance(
       clientX,
@@ -263,12 +230,8 @@ const MouseWordTrail = ({ children, words, renderImageBuffer, rotationRange }) =
       {
         opacity: [0, 1],
         transform: [
-          `translate(-50%, -25%) scale(0.5) ${
-            wordIndex % 2 ? `rotate(${rotation}deg)` : `rotate(-${rotation}deg)`
-          }`,
-          `translate(-50%, -50%) scale(1) ${
-            wordIndex % 2 ? `rotate(-${rotation}deg)` : `rotate(${rotation}deg)`
-          }`,
+          `translate(-50%, -25%) scale(0.5) ${wordIndex % 2 ? `rotate(${rotation}deg)` : `rotate(-${rotation}deg)`}`,
+          `translate(-50%, -50%) scale(1) ${wordIndex % 2 ? `rotate(-${rotation}deg)` : `rotate(${rotation}deg)`}`,
         ],
       },
       { type: "spring", damping: 15, stiffness: 200 }

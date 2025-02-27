@@ -255,6 +255,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { format } from 'date-fns';
+import Navbar from "./Navbar";
+import NavbarDrawer from "./NavbarDrawer";
 
 const Results = ({ history }) => {
   const latestResult = history[0]?.results || [];
@@ -306,9 +308,12 @@ const Results = ({ history }) => {
     };
 
   return (
+    <div>
+      {/* <Navbar /> */}
+      <NavbarDrawer />
     <div className="min-h-screen bg-gray-900 py-8 px-4 lg:px-8">
       {/* Header Section */}
-      <div className="text-center mb-8 mt-20">
+      <div className="text-center mb-8 mt-4">
         <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-100">
             Analysis Results
@@ -471,6 +476,7 @@ const Results = ({ history }) => {
           </div>
         )}
       </motion.div>
+    </div>
     </div>
   );
 };

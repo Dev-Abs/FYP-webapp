@@ -72,6 +72,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { DragCards } from "./DragCards";
+import Navbar from "./Navbar";
+import NavbarDrawer from "./NavbarDrawer";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -80,7 +82,10 @@ const fadeIn = {
 
 const AboutPage = () => {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 py-12 mt-20">
+    <div>
+      {/* <Navbar /> */}
+      <NavbarDrawer />
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 py-12 pt-10">
       <motion.div
         className="container mx-auto px-4"
         initial="hidden"
@@ -140,6 +145,7 @@ const AboutPage = () => {
           </div>
         </motion.div>
       </motion.div>
+    </div>
     </div>
   );
 };

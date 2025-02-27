@@ -8,6 +8,9 @@ import AboutPage from "./components/AboutPage";
 import TrippyScroll from "./components/TrippyScroll";
 import NeuroCardRotatingStatements from "./components/NeuroCardRotatingStatements";
 import NeuroCareInteractive from "./components/NeuroCareInteractive";
+import { NeuroScrollExperience } from "./components/NeuroScrollExperience";
+import Main from "./components/Main";
+import NavbarDrawer from "./components/NavbarDrawer";
 
 // Helper function to load/save history
 const usePersistedHistory = () => {
@@ -39,9 +42,12 @@ function App() {
 
   return (
     <Router>
-      <Navbar />
+      {/* if path is not === / then show navbar */}
+      {/* get current path */}
+      {/* <NavbarDrawer /> */}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/home" element={<Home />} />
         <Route 
           path="/results" 
           element={<Results history={analysisHistory} />} 
@@ -53,6 +59,8 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         {/* <Route path="/relieve" element={<NeuroCardRotatingStatements />} /> */}
         <Route path="/wecare" element={<NeuroCareInteractive />} />
+        {/* <Route path="/wecare" element={<NeuroCardRotatingStatements />} /> */}
+        {/* <Route path="/wecare" element={<TrippyScroll />} /> */}
         </Routes>
     </Router>
   );
