@@ -80,7 +80,7 @@ const ParticleRing = () => {
         camera={{ position: [15, -5, -5] }}
         style={{
           height: "100%",
-          background: "radial-gradient(circle at center, #0f172a 0%, #020617 100%)",
+          // background: "radial-gradient(circle at center, #0f172a 0%, #020617 100%)",
         }}
       >
         <OrbitControls 

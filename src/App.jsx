@@ -5,6 +5,9 @@ import Navbar from "./components/Navbar";
 import Results from "./components/Results";
 import UploadPage from "./components/UploadPage";
 import AboutPage from "./components/AboutPage";
+import TrippyScroll from "./components/TrippyScroll";
+import NeuroCardRotatingStatements from "./components/NeuroCardRotatingStatements";
+import NeuroCareInteractive from "./components/NeuroCareInteractive";
 
 // Helper function to load/save history
 const usePersistedHistory = () => {
@@ -48,7 +51,9 @@ function App() {
           element={<UploadPage addToHistory={addToHistory} />} 
         />
         <Route path="/about" element={<AboutPage />} />
-      </Routes>
+        {/* <Route path="/relieve" element={<NeuroCardRotatingStatements />} /> */}
+        <Route path="/wecare" element={<NeuroCareInteractive />} />
+        </Routes>
     </Router>
   );
 }

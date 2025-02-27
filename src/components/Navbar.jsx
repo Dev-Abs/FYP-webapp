@@ -29,7 +29,7 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className="bg-gray-800 fixed w-full z-20 top-0 start-0 border-b  border-gray-200 dark:border-gray-600"
+      className="bg-gray-900 fixed w-full z-20 top-0 start-0"
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -139,7 +139,7 @@ const Navbar = () => {
             </motion.div>
           )}
         </AnimatePresence> */}
-        <AnimatedTabs items={["Home", "Upload EEG", "Results", "About"]} />
+        <AnimatedTabs items={["Home", "Upload EEG", "Results", "About", 'We Care']} />
         
         {/* <ul className="md:flex hidden p-4 md:flex-row md:space-x-8 bg-gray-50 dark:bg-gray-800 rounded-lg md:bg-transparent">
                 {["Home", "Upload EEG", "Results", "About"].map((item, index) => (

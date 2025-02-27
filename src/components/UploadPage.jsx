@@ -254,44 +254,33 @@ export default function UploadPage({ addToHistory }) {
       setUploadStatus('No file selected')
       return
     }
-
+  
     try {
       setUploadStatus('Uploading and analyzing...')
       setProgress(50)
-
+  
       const formData = new FormData()
       formData.append('file', file)
-
-      const response = await fetch('http://localhost:5000/predict', {
+  
+      // const response = await fetch(`${import.meta.env.VITE_API_URL}/predict`, {
+      const response = await fetch(`http://localhost:5000/predict`, {
         method: 'POST',
-        body: formData,
+        body: formData
       })
-
+      
+  
       if (!response.ok) {
         const errorData = await response.json()
         throw new Error(errorData.error || 'Analysis failed')
       }
-
+  
       const result = await response.json()
-      
+  
       // Update progress and status
       setProgress(100)
       setUploadStatus('Analysis complete! Redirecting to results...')
       setPrediction(result.prediction)
-
-      // Add to history
-      // addToHistory({
-      //   date: new Date().toLocaleDateString('en-US', {
-      //     year: 'numeric',
-      //     month: 'long',
-      //     day: 'numeric',
-      //     hour: '2-digit',
-      //     minute: '2-digit'
-      //   }),
-      //   filename: file.name,
-      //   results: result.prediction,
-      //   status: result.prediction.some(p => p > 0.5) ? 'Abnormal' : 'Normal'
-      // })
+  
       addToHistory({
         date: new Date().toLocaleDateString('en-US', {
           year: 'numeric',
@@ -303,21 +292,23 @@ export default function UploadPage({ addToHistory }) {
         filename: file.name,
         results: result.prediction,
         status: result.prediction.some(p => p > 0.5) ? 'Depressed' : 'Normal',
-        modelVersion: '1.0.0' // Add any additional metadata
-      });
-
-      // Redirect after 2 seconds
+        modelVersion: '1.0.0'
+      })
+  
       setTimeout(() => {
         navigate('/results')
       }, 2000)
-
+  
     } catch (error) {
       setProgress(0)
-      setUploadStatus(error.message || 'Error processing file')
+      setUploadStatus(error.name === 'AbortError' 
+        ? 'Request timed out. Please try again.' 
+        : error.message || 'Error processing file')
       setPrediction(null)
       console.error('Upload Error:', error)
     }
   }
+  
 
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center py-8 px-4">

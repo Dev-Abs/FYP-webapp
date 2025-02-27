@@ -169,7 +169,7 @@ import ParticleRing from "./ParticleRing";
 
 const Hero = () => {
   return (
-    <section className="w-full px-8 py-12 mt-20 min-h-[700px] grid grid-cols-1 md:grid-cols-2 items-center gap-8 mx-auto relative overflow-hidden bg-gray-900">
+    <section className="w-full px-8 py-12 mt-20 grid grid-cols-1 md:grid-cols-2 items-center gap-8 mx-auto relative overflow-hidden bg-gray-900 min-h-screen">
       {/* Particle Background */}
       <div className="absolute inset-0 z-0">
         <ParticleRing />
