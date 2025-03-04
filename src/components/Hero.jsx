@@ -166,6 +166,7 @@ import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import UploadEEG from "./UploadEEG";
 import ParticleRing from "./ParticleRing";
+import CircularText from "./CircularText";
 
 const Hero = () => {
   return (
@@ -174,7 +175,6 @@ const Hero = () => {
       <div className="absolute inset-0 z-0">
         <ParticleRing />
       </div>
-
       {/* Hero Text */}
       <div className="relative z-10 md:ml-20">
         <motion.span 

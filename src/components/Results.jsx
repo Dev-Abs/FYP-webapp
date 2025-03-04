@@ -21,15 +21,15 @@
 //         label: value > 0.5 ? 'Depressed' : 'Normal'
 //       }));
 //     }
-    
+
 //     if (typeof latestResult === 'object') {
 //       return Object.entries(latestResult).map(([key, value], index) => ({
 //         id: index,
 //         title: key,
 //         value: typeof value === 'number' ? value.toFixed(2) : value,
-//         color: typeof value === 'number' ? 
+//         color: typeof value === 'number' ?
 //           (value > 0.5 ? 'text-red-500' : 'text-green-500') : 'text-gray-500',
-//         label: typeof value === 'number' ? 
+//         label: typeof value === 'number' ?
 //           (value > 0.5 ? 'Depressed' : 'Normal') : ''
 //       }));
 //     }
@@ -73,7 +73,7 @@
 //           </button>
 //         </div>
 //         <p className="text-gray-600">
-//           {history.length > 0 
+//           {history.length > 0
 //             ? `${history.length} analysis records found`
 //             : "No analysis history available"}
 //         </p>
@@ -88,7 +88,7 @@
 
 //       {/* Current Metrics */}
 //       {metrics.length > 0 && (
-//         <motion.div 
+//         <motion.div
 //           className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
 //           initial={{ opacity: 0 }}
 //           animate={{ opacity: 1 }}
@@ -121,7 +121,7 @@
 //       )}
 
 //       {/* Analysis History */}
-//       <motion.div 
+//       <motion.div
 //         className="bg-white rounded-xl shadow-md p-6"
 //         initial={{ opacity: 0 }}
 //         animate={{ opacity: 1 }}
@@ -254,15 +254,16 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { format } from 'date-fns';
+import { format } from "date-fns";
 import Navbar from "./Navbar";
 import NavbarDrawer from "./NavbarDrawer";
+import Chatbot from "./Chatbot";
 
 const Results = ({ history }) => {
   const latestResult = history[0]?.results || [];
 
   const formatDate = (isoString) => {
-    return format(new Date(isoString), 'MMM dd, yyyy - HH:mm:ss');
+    return format(new Date(isoString), "MMM dd, yyyy - HH:mm:ss");
   };
 
   const getMetrics = () => {
@@ -270,16 +271,21 @@ const Results = ({ history }) => {
       return latestResult.map((value, index) => ({
         id: index,
         value: value.toFixed(2),
-        status: value > 0.5 ? 'Depressed' : 'Normal'
+        status: value > 0.5 ? "Depressed" : "Normal",
       }));
     }
-    
-    if (typeof latestResult === 'object') {
+
+    if (typeof latestResult === "object") {
       return Object.entries(latestResult).map(([key, value], index) => ({
         id: index,
         title: key,
-        value: typeof value === 'number' ? value.toFixed(2) : value,
-        status: typeof value === 'number' ? (value > 0.5 ? 'Depressed' : 'Normal') : ''
+        value: typeof value === "number" ? value.toFixed(2) : value,
+        status:
+          typeof value === "number"
+            ? value > 0.5
+              ? "Depressed"
+              : "Normal"
+            : "",
       }));
     }
 
@@ -288,195 +294,222 @@ const Results = ({ history }) => {
 
   const metrics = getMetrics();
 
-     // Download handler
-     const handleDownload = () => {
-      const dataStr = JSON.stringify(history, null, 2);
-      const blob = new Blob([dataStr], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `eeg-history-${new Date().getTime()}.json`;
-      link.click();
-    };
-  
-    // Clear history handler
-    const handleClearHistory = () => {
-      if (window.confirm('Clear all analysis history?')) {
-        localStorage.removeItem('eeg-analysis-history');
-        window.location.reload();
-      }
-    };
+  // Download handler
+  const handleDownload = () => {
+    const dataStr = JSON.stringify(history, null, 2);
+    const blob = new Blob([dataStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `eeg-history-${new Date().getTime()}.json`;
+    link.click();
+  };
+
+  // Clear history handler
+  const handleClearHistory = () => {
+    if (window.confirm("Clear all analysis history?")) {
+      localStorage.removeItem("eeg-analysis-history");
+      window.location.reload();
+    }
+  };
 
   return (
     <div>
       {/* <Navbar /> */}
       <NavbarDrawer />
-    <div className="min-h-screen bg-gray-900 py-8 px-4 lg:px-8">
-      {/* Header Section */}
-      <div className="text-center mb-8 mt-4">
-        <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-100">
-            Analysis Results
-          </h1>
-          <button
-            onClick={handleClearHistory}
-            className="bg-red-500/10 hover:bg-red-500/20 text-red-400 px-4 py-2 rounded-lg transition-colors text-sm"
-          >
-            Clear History
-          </button>
-        </div>
-        
-        <p className="text-gray-400 mb-6">
-          {history.length > 0 
-            ? `${history.length} analysis records found`
-            : "No analysis history available"}
-        </p>
-        
-        <div className="inline-flex items-center gap-2 text-sm text-gray-400">
-          <span className="flex items-center gap-1">
-            <div className="w-2 h-2 bg-green-400 rounded-full" />
-            Normal (0)
-          </span>
-          <span className="flex items-center gap-1">
-            <div className="w-2 h-2 bg-red-400 rounded-full" />
-            Depressed (1)
-          </span>
-        </div>
-      </div>
-
-      {/* Current Metrics */}
-      {metrics.length > 0 && (
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
-          {metrics.map((metric, index) => (
-            <motion.div
-              key={metric.id}
-              className="bg-gray-800 rounded-xl p-6"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: index * 0.1, duration: 0.3 }}
-            >
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-gray-400 text-sm mb-1">
-                    {metric.title || `Recent File Prediction`}
-                  </h3>
-                  <span className={`text-2xl font-semibold ${
-                    metric.status === 'Depressed' ? 'text-red-400' : 'text-green-400'
-                  }`}>
-                    {metric.value}
-                  </span>
-                </div>
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                  metric.status === 'Depressed' ? 'bg-red-400/10' : 'bg-green-400/10'
-                }`}>
-                  <div className={`w-2 h-2 rounded-full ${
-                    metric.status === 'Depressed' ? 'bg-red-400' : 'bg-green-400'
-                  }`} />
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      )}
-
-      {/* Analysis History */}
-      <motion.div 
-        className="bg-gray-800 rounded-xl p-6"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-      >
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-          <h2 className="text-xl font-semibold text-gray-100">
-            Analysis History
-          </h2>
-          {history.length > 0 && (
+      <Chatbot />
+      <div className="min-h-screen bg-gray-900 py-8 px-4 lg:px-8">
+        {/* Header Section */}
+        <div className="text-center mb-8 mt-4">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-100">
+              Analysis Results
+            </h1>
             <button
-              onClick={handleDownload}
-              className="bg-indigo-400/10 hover:bg-indigo-400/20 text-indigo-400 px-4 py-2 rounded-lg transition-colors text-sm"
+              onClick={handleClearHistory}
+              className="bg-red-500/10 hover:bg-red-500/20 text-red-400 px-4 py-2 rounded-lg transition-colors text-sm"
             >
-              Download History
+              Clear History
             </button>
-          )}
+          </div>
+
+          <p className="text-gray-400 mb-6">
+            {history.length > 0
+              ? `${history.length} analysis records found`
+              : "No analysis history available"}
+          </p>
+
+          <div className="inline-flex items-center gap-2 text-sm text-gray-400">
+            <span className="flex items-center gap-1">
+              <div className="w-2 h-2 bg-green-400 rounded-full" />
+              Normal (0)
+            </span>
+            <span className="flex items-center gap-1">
+              <div className="w-2 h-2 bg-red-400 rounded-full" />
+              Depressed (1)
+            </span>
+          </div>
         </div>
 
-        {history.length === 0 ? (
-          <div className="text-center text-gray-400 py-8">
-            No analysis records found
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {history.map((session) => (
+        {/* Current Metrics */}
+        {metrics.length > 0 && (
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            {metrics.map((metric, index) => (
               <motion.div
-                key={session.id}
-                className="bg-gray-700/50 hover:bg-gray-700/70 rounded-xl p-4 transition-colors"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                key={metric.id}
+                className="bg-gray-800 rounded-xl p-6"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: index * 0.1, duration: 0.3 }}
               >
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-3 gap-2">
+                <div className="flex items-center justify-between">
                   <div>
-                    <p className="font-medium text-gray-300">
-                      {formatDate(session.timestamp)}
-                    </p>
-                    {/* <p className="text-sm text-gray-400">
-                      {session.filename}
-                    </p> */}
+                    <h3 className="text-gray-400 text-sm mb-1">
+                      {metric.title || `Recent File Prediction`}
+                    </h3>
+                    <span
+                      className={`text-2xl font-semibold ${
+                        metric.status === "Depressed"
+                          ? "text-red-400"
+                          : "text-green-400"
+                      }`}
+                    >
+                      {metric.value}
+                    </span>
                   </div>
-                  <span className={`text-sm ${
-                    session.status === 'Depressed' ? 'text-red-400' : 'text-green-400'
-                  }`}>
-                    {session.status}
-                  </span>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  {Array.isArray(session.results) ? (
-                    session.results.map((result, index) => (
-                      <div
-                        key={index}
-                        className="bg-gray-600/50 p-3 rounded-lg"
-                      >
-                        <div className="flex items-center justify-between">
-                          <span className="text-gray-400 text-sm">
-                            {session.filename}
-                          </span>
-                          <span className={`text-sm ${
-                            result > 0.5 ? 'text-red-400' : 'text-green-400'
-                          }`}>
-                            {result.toFixed(2)}
-                          </span>
-                        </div>
-                      </div>
-                    ))
-                  ) : (
-                    Object.entries(session.results || {}).map(
-                      ([key, value], index) => (
-                        <div
-                          key={index}
-                          className="bg-gray-600/50 p-3 rounded-lg"
-                        >
-                          <div className="flex items-center justify-between">
-                            <span className="text-gray-400 text-sm">{key}</span>
-                            <span className={`text-sm ${
-                              value > 0.5 ? 'text-red-400' : 'text-green-400'
-                            }`}>
-                              {typeof value === 'number' ? value.toFixed(2) : value}
-                            </span>
-                          </div>
-                        </div>
-                      )
-                    )
-                  )}
+                  <div
+                    className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                      metric.status === "Depressed"
+                        ? "bg-red-400/10"
+                        : "bg-green-400/10"
+                    }`}
+                  >
+                    <div
+                      className={`w-2 h-2 rounded-full ${
+                        metric.status === "Depressed"
+                          ? "bg-red-400"
+                          : "bg-green-400"
+                      }`}
+                    />
+                  </div>
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         )}
-      </motion.div>
-    </div>
+
+        {/* Analysis History */}
+        <motion.div
+          className="bg-gray-800 rounded-xl p-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+            <h2 className="text-xl font-semibold text-gray-100">
+              Analysis History
+            </h2>
+            {history.length > 0 && (
+              <button
+                onClick={handleDownload}
+                className="bg-indigo-400/10 hover:bg-indigo-400/20 text-indigo-400 px-4 py-2 rounded-lg transition-colors text-sm"
+              >
+                Download History
+              </button>
+            )}
+          </div>
+
+          {history.length === 0 ? (
+            <div className="text-center text-gray-400 py-8">
+              No analysis records found
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {history.map((session) => (
+                <motion.div
+                  key={session.id}
+                  className="bg-gray-700/50 hover:bg-gray-700/70 rounded-xl p-4 transition-colors"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                >
+                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-3 gap-2">
+                    <div>
+                      <p className="font-medium text-gray-300">
+                        {formatDate(session.timestamp)}
+                      </p>
+                      {/* <p className="text-sm text-gray-400">
+                      {session.filename}
+                    </p> */}
+                    </div>
+                    <span
+                      className={`text-sm ${
+                        session.status === "Depressed"
+                          ? "text-red-400"
+                          : "text-green-400"
+                      }`}
+                    >
+                      {session.status}
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    {Array.isArray(session.results)
+                      ? session.results.map((result, index) => (
+                          <div
+                            key={index}
+                            className="bg-gray-600/50 p-3 rounded-lg"
+                          >
+                            <div className="flex items-center justify-between">
+                              <span className="text-gray-400 text-sm">
+                                {session.filename}
+                              </span>
+                              <span
+                                className={`text-sm ${
+                                  result > 0.5
+                                    ? "text-red-400"
+                                    : "text-green-400"
+                                }`}
+                              >
+                                {result.toFixed(2)}
+                              </span>
+                            </div>
+                          </div>
+                        ))
+                      : Object.entries(session.results || {}).map(
+                          ([key, value], index) => (
+                            <div
+                              key={index}
+                              className="bg-gray-600/50 p-3 rounded-lg"
+                            >
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-400 text-sm">
+                                  {key}
+                                </span>
+                                <span
+                                  className={`text-sm ${
+                                    value > 0.5
+                                      ? "text-red-400"
+                                      : "text-green-400"
+                                  }`}
+                                >
+                                  {typeof value === "number"
+                                    ? value.toFixed(2)
+                                    : value}
+                                </span>
+                              </div>
+                            </div>
+                          )
+                        )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
+        </motion.div>
+      </div>
     </div>
   );
 };

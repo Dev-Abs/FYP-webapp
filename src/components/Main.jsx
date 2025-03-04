@@ -2,17 +2,26 @@ import { useMotionValue, motion, useSpring, useTransform } from "framer-motion";
 import React, { useRef } from "react";
 import { FiArrowRight } from "react-icons/fi";
 import { Link as RouterLink } from "react-router-dom";
+import CircularText from "./CircularText";
 
 // Create a motion-enhanced Link component
 const MotionLink = motion(RouterLink);
 
 const Home = () => {
   return (
-    <section className="bg-neutral-950 p-4 md:p-8 min-h-screen flex flex-col justify-center items-center">
+    <section className="bg-neutral-950 pt-20 p-4 md:p-8 min-h-screen flex flex-col justify-center items-center">
       <div className="text-center mb-12">
-        <h1 className="text-5xl font-bold text-white">
+        {/* <h1 className="text-5xl font-bold text-white">
           NeuroCare
-        </h1>
+        </h1> */}
+        <CircularText
+          text="NEURO*CARE*"
+          onHover="speedUp"
+          spinDuration={20}
+          className="custom-class"
+          Top="4"
+          Left="-30px"
+        />
         {/* <p className="text-lg text-neutral-300 mt-4">
           Explore our content using the links below.
         </p> */}
@@ -47,6 +56,12 @@ const Home = () => {
           subheading="Experience interactive neuro care"
           imgSrc="we-care.png"
           href="/wecare"
+        />
+                <Link
+          heading="Set Server URL"
+          subheading="Set the API URL for the server"
+          imgSrc="url.png"
+          href="/setserverurl"
         />
       </div>
     </section>

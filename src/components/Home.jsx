@@ -4,12 +4,14 @@ import Hero from "./Hero";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import NavbarDrawer from "./NavbarDrawer";
+import Chatbot from "./Chatbot";
 
 const Home = () => {
   return (
     <>
       <div>
         {/* <Navbar /> */}
+        <Chatbot />
         <NavbarDrawer />
         <Hero />
         <Footer />

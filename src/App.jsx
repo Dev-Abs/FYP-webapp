@@ -11,6 +11,7 @@ import NeuroCareInteractive from "./components/NeuroCareInteractive";
 import { NeuroScrollExperience } from "./components/NeuroScrollExperience";
 import Main from "./components/Main";
 import NavbarDrawer from "./components/NavbarDrawer";
+import ApiUrlSetter from "./components/ApiUrlSetter";
 
 // Helper function to load/save history
 const usePersistedHistory = () => {
@@ -48,6 +49,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/setserverurl" element={<ApiUrlSetter />} />
         <Route 
           path="/results" 
           element={<Results history={analysisHistory} />} 
