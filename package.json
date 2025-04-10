@@ -24,6 +24,7 @@
     "react-dom": "19.0.0",
     "react-drag-drop-files": "^2.4.0",
     "react-icons": "^5.4.0",
+    "react-intersection-observer": "^9.16.0",
     "react-router-dom": "^7.0.1",
     "react-tooltip": "^5.28.0",
     "recharts": "^2.15.1",

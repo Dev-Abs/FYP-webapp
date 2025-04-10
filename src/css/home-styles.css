@@ -1,0 +1,201 @@
+/* home-styles.css */
+/* Additional styles for enhanced home page */
+
+/* Background animations and effects */
+.brain-animation {
+    background-size: 400% 400%;
+    animation: gradient-move 15s ease infinite;
+  }
+  
+  @keyframes gradient-move {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  /* Neural network visualization */
+  .neural-network {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .neural-network::before,
+  .neural-network::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.2) 1px, transparent 1px),
+      radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.2) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.3;
+  }
+  
+  .neural-network::after {
+    background-size: 40px 40px;
+    animation: shift 60s linear infinite;
+  }
+  
+  @keyframes shift {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(20px, 20px); }
+    100% { transform: translate(0, 0); }
+  }
+  
+  /* Pulsing elements */
+  .pulse-slow {
+    animation: pulse-slow 4s infinite;
+  }
+  
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+  
+  /* Smooth scrolling behavior for whole page */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Glowing elements */
+  .glow-effect {
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .glow-effect:hover {
+    box-shadow: 0 0 25px rgba(99, 102, 241, 0.8);
+  }
+  
+  /* Blob animations */
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.3;
+    animation: float 20s infinite alternate;
+  }
+  
+  .blob-1 {
+    top: 10%;
+    left: 10%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle at center, rgba(99, 102, 241, 0.4), rgba(99, 102, 241, 0.1));
+    animation-delay: 0s;
+  }
+  
+  .blob-2 {
+    bottom: 20%;
+    right: 15%;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle at center, rgba(139, 92, 246, 0.4), rgba(139, 92, 246, 0.1));
+    animation-delay: 5s;
+  }
+  
+  @keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -30px) scale(1.1); }
+    100% { transform: translate(-30px, 30px) scale(0.9); }
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #1f2937;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #4f46e5;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #6366f1;
+  }
+  
+  /* Gradient text animation */
+  .gradient-text {
+    background: linear-gradient(90deg, #4f46e5, #8b5cf6, #6366f1);
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: gradient-text 8s linear infinite;
+  }
+  
+  @keyframes gradient-text {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+  
+  /* Enhanced button styles */
+  .button-enhanced {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+  }
+  
+  .button-enhanced::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+    z-index: -1;
+  }
+  
+  .button-enhanced:hover::before {
+    transform: translateX(100%);
+  }
+  
+  /* EEG wave animation */
+  .eeg-wave {
+    display: block;
+    width: 100%;
+    height: 50px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60' preserveAspectRatio='none'%3E%3Cpath d='M0,30 C150,10 350,50 500,30 C650,10 850,50 1000,30 C1050,20 1150,40 1200,30' stroke='rgba(99, 102, 241, 0.3)' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+    background-size: 1200px 60px;
+    animation: eeg-animate 20s linear infinite;
+  }
+  
+  @keyframes eeg-animate {
+    0% { background-position: 0 0; }
+    100% { background-position: 1200px 0; }
+  }
+  
+  /* Shimmer effect for loading states */
+  .shimmer {
+    background: linear-gradient(90deg, 
+      rgba(255, 255, 255, 0.02), 
+      rgba(255, 255, 255, 0.1), 
+      rgba(255, 255, 255, 0.02)
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .blob-1, .blob-2 {
+      width: 150px;
+      height: 150px;
+    }
+  }

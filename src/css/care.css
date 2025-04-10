@@ -1,8 +1,224 @@
-.hide-scrollbar::-webkit-scrollbar {
-    display: none;
+/* Add these styles to your existing care.css file */
+
+/* Enhance the chatbot and interactive elements */
+.enhanced-chatbot-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.enhanced-chatbot-button:after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    rgba(255, 255, 255, 0) 10%,
+    rgba(255, 255, 255, 0.1) 30%,
+    rgba(255, 255, 255, 0) 50%
+  );
+  transform: rotate(30deg);
+  transition: all 0.6s;
+}
+
+.enhanced-chatbot-button:hover:after {
+  transform: rotate(30deg) translate(50%, 50%);
+}
+
+/* Glass morphism effect for cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.1), 
+    0 0 20px rgba(79, 70, 229, 0.2);
+}
+
+/* Pulsating effect for buttons */
+@keyframes pulse-border {
+  0% {
+    box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4);
   }
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  70% {
+    box-shadow: 0 0 0 10px rgba(79, 70, 229, 0);
   }
-  
+  100% {
+    box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
+  }
+}
+
+.pulse-button {
+  animation: pulse-border 2s infinite;
+}
+
+/* Floating animation for cards */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.floating-card {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Gradient text for headings */
+.gradient-text {
+  background: linear-gradient(90deg, #4F46E5 0%, #8B5CF6 50%, #EC4899 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+/* Neural network background animation */
+.neural-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.neural-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(79, 70, 229, 0.1) 0%, transparent 70%);
+  opacity: 0.7;
+}
+
+.neural-node {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+}
+
+.neural-connection {
+  position: absolute;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+  transform-origin: left center;
+}
+
+/* Chatbot enhancements */
+.chatbot-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.chatbot-container:hover {
+  transform: translateY(-5px);
+}
+
+.chatbot-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, #4F46E5, #8B5CF6, #EC4899);
+}
+
+.chat-message {
+  transition: all 0.3s ease;
+  max-width: 80%;
+}
+
+.chat-message-bot {
+  background: linear-gradient(135deg, #4338CA 0%, #6366F1 100%);
+  border-radius: 1rem 1rem 1rem 0;
+}
+
+.chat-message-user {
+  background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);
+  border-radius: 1rem 1rem 0 1rem;
+}
+
+/* Message typing animation */
+.message-typing {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.typing-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: white;
+  border-radius: 50%;
+}
+
+/* Quick reply buttons styling */
+.quick-reply-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  color: white;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+.quick-reply-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Draggable handle for chatbot */
+.drag-handle {
+  cursor: grab;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 0.25rem;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+/* Brain visualization elements */
+.brain-region {
+  position: relative;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.brain-region:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.brain-region::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, #4F46E5, #8B5CF6);
+  border-radius: 4px 0 0 4px;
+}

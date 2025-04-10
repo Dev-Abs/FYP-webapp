@@ -5,64 +5,65 @@ import { Link as RouterLink } from "react-router-dom";
 import CircularText from "./CircularText";
 
 // Create a motion-enhanced Link component
-const MotionLink = motion(RouterLink);
+const MotionLink = motion.create(RouterLink);
 
 const Home = () => {
   return (
-    <section className="bg-neutral-950 pt-20 p-4 md:p-8 min-h-screen flex flex-col justify-center items-center">
-      <div className="text-center mb-12">
-        {/* <h1 className="text-5xl font-bold text-white">
-          NeuroCare
-        </h1> */}
-        <CircularText
-          text="NEURO*CARE*"
-          onHover="speedUp"
-          spinDuration={20}
-          className="custom-class"
-          Top="4"
-          Left="-30px"
-        />
-        {/* <p className="text-lg text-neutral-300 mt-4">
-          Explore our content using the links below.
-        </p> */}
-      </div>
-      <div className="w-full max-w-5xl flex flex-col gap-8">
-        <Link
-          heading="Home"
-          subheading="Learn what we do here"
-          imgSrc="home.png"
-          href="/home"
-        />
-        <Link
-          heading="Upload EEG"
-          subheading="Upload your EEG for analysis"
-          imgSrc="upload.png"
-          href="/uploadeeg"
-        />
-        <Link
-          heading="Results"
-          subheading="View analysis history"
-          imgSrc="results.png"
-          href="/results"
-        />
-        <Link
-          heading="About"
-          subheading="Learn what we do here"
-          imgSrc="about.png"
-          href="/about"
-        />
-        <Link
-          heading="We Care"
-          subheading="Experience interactive neuro care"
-          imgSrc="we-care.png"
-          href="/wecare"
-        />
-                <Link
-          heading="Set Server URL"
-          subheading="Set the API URL for the server"
-          imgSrc="url.png"
-          href="/setserverurl"
-        />
+    <section className="relative bg-gradient-to-b from-gray-900 to-indigo-950 min-h-screen w-full overflow-x-hidden p-6 md:p-10">
+      
+      <div className="relative z-10 max-w-6xl mx-auto pt-10">
+        <div className="text-center mb-16">
+          <div className="inline-block mb-4">
+            <CircularText
+              text="NEURO*CARE*"
+              onHover="speedUp"
+              spinDuration={20}
+              className="filter drop-shadow-lg"
+            />
+          </div>
+          <p className="text-indigo-200 mt-4 text-lg max-w-xl mx-auto px-4">
+            Advanced mental health diagnostics with EEG technology
+          </p>
+        </div>
+
+        <div className="grid gap-4 md:gap-6 w-full">
+          <Link
+            heading="Home"
+            subheading="Learn what we do here"
+            imgSrc="home.png"
+            href="/home"
+          />
+          <Link
+            heading="Upload EEG"
+            subheading="Upload your EEG for analysis"
+            imgSrc="upload.png"
+            href="/uploadeeg"
+          />
+          <Link
+            heading="Results"
+            subheading="View analysis history"
+            imgSrc="results.png"
+            href="/results"
+          />
+          <Link
+            heading="About"
+            subheading="Learn what we do here"
+            imgSrc="about.png"
+            href="/about"
+          />
+          <Link
+            heading="We Care"
+            subheading="Experience interactive neuro care"
+            imgSrc="we-care.png"
+            href="/wecare"
+          />
+          <Link
+            heading="Set Server URL"
+            subheading="Set the API URL for the server"
+            imgSrc="url.png"
+            href="/setserverurl"
+          />
+        </div>
       </div>
     </section>
   );
@@ -101,7 +102,7 @@ const Link = ({ heading, imgSrc, subheading, href }) => {
       onMouseMove={handleMouseMove}
       initial="initial"
       whileHover="whileHover"
-      className="group relative flex items-center justify-between border-b-2 border-neutral-700 py-4 transition-colors duration-500 hover:border-neutral-50 md:py-8"
+      className="group bg-gray-800/90 hover:bg-indigo-900/70 rounded-lg p-4 flex items-center justify-between overflow-hidden relative transition-all duration-300 w-full"
     >
       <div>
         <motion.span
@@ -114,7 +115,7 @@ const Link = ({ heading, imgSrc, subheading, href }) => {
             staggerChildren: 0.075,
             delayChildren: 0.25,
           }}
-          className="relative z-10 block text-4xl font-bold text-neutral-500 transition-colors duration-500 group-hover:text-neutral-50 md:text-6xl"
+          className="relative z-10 block text-2xl md:text-3xl font-bold text-gray-300 transition-colors duration-300 group-hover:text-white"
         >
           {heading.split("").map((letter, i) => (
             <motion.span
@@ -130,7 +131,7 @@ const Link = ({ heading, imgSrc, subheading, href }) => {
             </motion.span>
           ))}
         </motion.span>
-        <span className="relative z-10 mt-2 block text-base text-neutral-500 transition-colors duration-500 group-hover:text-neutral-50">
+        <span className="relative z-10 mt-1 block text-sm text-gray-400 transition-colors duration-300 group-hover:text-indigo-200">
           {subheading}
         </span>
       </div>
@@ -148,7 +149,7 @@ const Link = ({ heading, imgSrc, subheading, href }) => {
         }}
         transition={{ type: "spring" }}
         src={imgSrc}
-        className="absolute z-0 h-24 w-32 rounded-lg object-cover md:h-48 md:w-64"
+        className="absolute z-0 h-24 w-32 rounded-lg object-cover md:h-32 md:w-48 sm:h-28 sm:w-40"
         alt={`Image representing a link for ${heading}`}
       />
 
@@ -158,9 +159,9 @@ const Link = ({ heading, imgSrc, subheading, href }) => {
           whileHover: { x: "0%", opacity: 1 },
         }}
         transition={{ type: "spring" }}
-        className="relative z-10 p-4"
+        className="relative z-10 bg-indigo-600 rounded-full p-2 flex-shrink-0 ml-2"
       >
-        <FiArrowRight className="text-5xl text-neutral-50" />
+        <FiArrowRight className="text-xl text-white" />
       </motion.div>
     </MotionLink>
   );
