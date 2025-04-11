@@ -447,7 +447,7 @@ const Results = ({ history }) => {
                         You haven't analyzed any EEG files yet. Upload an EDF file to begin your neural analysis.
                       </p>
                       <a 
-                        href="/upload" 
+                        href="/uploadeeg" 
                         className="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-xl transition-all"
                       >
                         <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -721,7 +721,7 @@ const Results = ({ history }) => {
               </p>
               
               <motion.a 
-                href="/upload" 
+                href="/uploadeeg" 
                 className="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-xl shadow-lg shadow-indigo-900/30 transition-all"
                 whileHover={{ y: -2, boxShadow: "0 10px 25px -5px rgba(79, 70, 229, 0.5)" }}
                 whileTap={{ scale: 0.98 }}
