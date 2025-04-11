@@ -82,7 +82,7 @@ function Footer() {
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 py-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 py-10">
           {/* Contact Info */}
           <div className="space-y-6">
             <motion.h3 
@@ -200,7 +200,7 @@ function Footer() {
           </div>
           
           {/* Products */}
-          <div className="space-y-6">
+          {/* <div className="space-y-6">
             <motion.h3 
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -245,7 +245,7 @@ function Footer() {
                 </motion.li>
               ))}
             </ul>
-          </div>
+          </div> */}
           
           {/* Legal & Social */}
           <div className="space-y-6">
@@ -330,8 +330,8 @@ function Footer() {
           whileInView={{ opacity: 1 }}
           className="pt-8 mt-6 border-t border-gray-800"
         >
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="flex items-center gap-6 mb-4 md:mb-0">
+          <div className="flex flex-col md:flex-row items-center justify-center">
+            {/* <div className="flex items-center gap-6 mb-4 md:mb-0">
               <div className="flex items-center gap-2 bg-gray-800 bg-opacity-50 px-3 py-1 rounded-full">
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
                 <span className="text-xs text-gray-300">ISO 13485 Certified</span>
@@ -344,14 +344,14 @@ function Footer() {
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
                 <span className="text-xs text-gray-300">FDA Cleared</span>
               </div>
-            </div>
+            </div> */}
             
             <p className="text-sm text-gray-500">
               © {currentYear} NeuroCare Technologies. All rights reserved.
             </p>
           </div>
           
-          <p className="text-xs text-gray-600 mt-4 text-center md:text-left">
+          <p className="text-xs flex justify-center items-center text-gray-600 mt-4 text-center md:text-left">
             Advancing mental health diagnostics through AI-powered EEG analysis. Registered with Pakistan Medical Commission.
           </p>
         </motion.div>

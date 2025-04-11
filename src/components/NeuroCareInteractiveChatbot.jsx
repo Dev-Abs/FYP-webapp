@@ -391,6 +391,7 @@ const NeuroCareInteractiveChatbot = ({ onClose }) => {
                     <FaRobot className="text-white text-sm" />
                   </div>
                 )}
+
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -399,6 +400,12 @@ const NeuroCareInteractiveChatbot = ({ onClose }) => {
                     msg.sender === "bot"
                       ? "bg-indigo-600 text-white rounded-tl-none"
                       : "bg-blue-600 text-white rounded-tr-none"
+                  } ${
+                    // if message sender is bot and text starts with Welcome add margin top of 20
+                    msg.sender === "bot" &&
+                    msg.text.startsWith("Welcome")
+                        ? "mt-20"
+                        : ""
                   }`}
                 >
                   {msg.text}

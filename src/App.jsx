@@ -12,6 +12,8 @@ import { NeuroScrollExperience } from "./components/NeuroScrollExperience";
 import Main from "./components/Main";
 import NavbarDrawer from "./components/NavbarDrawer";
 import ApiUrlSetter from "./components/ApiUrlSetter";
+import WellnessGame from "./components/WellnessGame";
+import ImageDownloader from "./components/ImageDownloader"; 
 
 // Helper function to load/save history
 const usePersistedHistory = () => {
@@ -43,9 +45,7 @@ function App() {
 
   return (
     <Router>
-      {/* if path is not === / then show navbar */}
-      {/* get current path */}
-      {/* <NavbarDrawer /> */}
+      <NavbarDrawer />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/home" element={<Home />} />
@@ -59,11 +59,10 @@ function App() {
           element={<UploadPage addToHistory={addToHistory} />} 
         />
         <Route path="/about" element={<AboutPage />} />
-        {/* <Route path="/relieve" element={<NeuroCardRotatingStatements />} /> */}
         <Route path="/wecare" element={<NeuroCareInteractive />} />
-        {/* <Route path="/wecare" element={<NeuroCardRotatingStatements />} /> */}
-        {/* <Route path="/wecare" element={<TrippyScroll />} /> */}
-        </Routes>
+        <Route path="/wellness" element={<WellnessGame isActive={true} />} />
+        {/* <Route path="download" element={<ImageDownloader />} /> */}
+      </Routes>
     </Router>
   );
 }

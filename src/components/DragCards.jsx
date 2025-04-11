@@ -40,7 +40,7 @@ const Cards = () => {
         rotate="10deg"
         className="w-32 md:w-56"
         name="Ajay Kumar"
-        role="AI Engineer"
+        role="ML Engineer"
       />
       <Card
         containerRef={containerRef}
@@ -51,7 +51,7 @@ const Cards = () => {
         rotate="-10deg"
         className="w-24 md:w-48"
         name="Abdullah"
-        role="Data Scientist"
+        role="Web Developer"
       />
       <Card
         containerRef={containerRef}
@@ -62,7 +62,7 @@ const Cards = () => {
         rotate="5deg"
         className="w-40 md:w-64"
         name="Asim"
-        role="Neuroscientist"
+        role="Research Engineer"
       />
       <Card
         containerRef={containerRef}
@@ -73,7 +73,7 @@ const Cards = () => {
         rotate="-5deg"
         className="w-36 md:w-60"
         name="Khuzaim"
-        role="Backend Developer"
+        role="ML Engineer"
       />
     </div>
   );

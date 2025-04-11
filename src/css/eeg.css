@@ -1,0 +1,279 @@
+/* EEG Signal Wave Animation Styles */
+
+.eeg-animation-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    opacity: 0.2;
+    pointer-events: none;
+  }
+  
+  .eeg-wave {
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: transparent;
+    opacity: 0.6;
+  }
+  
+  .eeg-wave::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(99, 102, 241, 0.8) 50%, transparent 100%);
+    animation: eeg-wave-animation 8s linear infinite;
+  }
+  
+  .eeg-wave-1 {
+    top: 20%;
+  }
+  
+  .eeg-wave-2 {
+    top: 35%;
+    opacity: 0.4;
+  }
+  
+  .eeg-wave-2::before {
+    animation-delay: 1s;
+    animation-duration: 10s;
+  }
+  
+  .eeg-wave-3 {
+    top: 50%;
+    opacity: 0.5;
+  }
+  
+  .eeg-wave-3::before {
+    animation-delay: 0.5s;
+    animation-duration: 7s;
+  }
+  
+  .eeg-wave-4 {
+    top: 65%;
+    opacity: 0.4;
+  }
+  
+  .eeg-wave-4::before {
+    animation-delay: 1.5s;
+    animation-duration: 9s;
+  }
+  
+  .eeg-wave-5 {
+    top: 80%;
+  }
+  
+  .eeg-wave-5::before {
+    animation-delay: 2s;
+  }
+  
+  @keyframes eeg-wave-animation {
+    0% {
+      background-position: 0% 0%;
+      transform: translateX(-100%) scaleY(1);
+    }
+    10% {
+      transform: translateX(-80%) scaleY(1.5);
+    }
+    20% {
+      transform: translateX(-60%) scaleY(1);
+    }
+    30% {
+      transform: translateX(-40%) scaleY(2);
+    }
+    40% {
+      transform: translateX(-20%) scaleY(1);
+    }
+    50% {
+      transform: translateX(0%) scaleY(1.5);
+    }
+    60% {
+      transform: translateX(20%) scaleY(1);
+    }
+    70% {
+      transform: translateX(40%) scaleY(3);
+    }
+    80% {
+      transform: translateX(60%) scaleY(1);
+    }
+    90% {
+      transform: translateX(80%) scaleY(2);
+    }
+    100% {
+      background-position: 100% 0%;
+      transform: translateX(100%) scaleY(1);
+    }
+  }
+  
+  /* Enhanced EEG signal spikes */
+  .eeg-spike-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    opacity: 0.15;
+    pointer-events: none;
+  }
+  
+  .eeg-spike {
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    overflow: hidden;
+  }
+  
+  .eeg-spike-1 {
+    top: 25%;
+  }
+  
+  .eeg-spike-2 {
+    top: 45%;
+  }
+  
+  .eeg-spike-3 {
+    top: 65%;
+  }
+  
+  .eeg-spike-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: rgba(99, 102, 241, 0.3);
+    transform-origin: center;
+  }
+  
+  .eeg-spike-dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(99, 102, 241, 0.6);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.8);
+    transform: translate(-50%, -50%);
+    top: 50%;
+    animation: eeg-spike-animation 10s linear infinite;
+  }
+  
+  @keyframes eeg-spike-animation {
+    0%, 100% {
+      left: -5%;
+      transform: translate(-50%, -50%) scaleY(1);
+    }
+    5% {
+      transform: translate(-50%, -50%) scaleY(1);
+    }
+    10% {
+      transform: translate(-50%, -50%) scaleY(3);
+    }
+    15% {
+      transform: translate(-50%, -50%) scaleY(1);
+    }
+    20% {
+      transform: translate(-50%, -50%) scaleY(1);
+    }
+    25% {
+      transform: translate(-50%, -50%) scaleY(4);
+    }
+    30% {
+      transform: translate(-50%, -50%) scaleY(1);
+    }
+    35% {
+      transform: translate(-50%, -50%) scaleY(2);
+    }
+    40% {
+      transform: translate(-50%, -50%) scaleY(1);
+    }
+    45% {
+      transform: translate(-50%, -50%) scaleY(3);
+    }
+    50% {
+      left: 105%;
+      transform: translate(-50%, -50%) scaleY(1);
+    }
+    100% {
+      left: 105%;
+      transform: translate(-50%, -50%) scaleY(1);
+    }
+  }
+  
+  .eeg-spike-dot-1 {
+    animation-delay: 0s;
+  }
+  
+  .eeg-spike-dot-2 {
+    animation-delay: 3.33s;
+  }
+  
+  .eeg-spike-dot-3 {
+    animation-delay: 6.66s;
+  }
+  
+  /* Grid pattern for brain mapping visual */
+  .brain-mapping-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(to right, rgba(99, 102, 241, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+  
+  /* Pulse rings to simulate brain activity */
+  .pulse-ring-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  .pulse-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid rgba(99, 102, 241, 0.3);
+    transform: translate(-50%, -50%) scale(0);
+    animation: pulse-ring-animation 5s linear infinite;
+  }
+  
+  .pulse-ring-1 {
+    width: 150px;
+    height: 150px;
+    top: 30%;
+    left: 35%;
+    animation-delay: 0s;
+  }
+  
+  .pulse-ring-2 {
+    width: 100px;
+    height: 100px;
+    top: 70%;
+    left: 60%;
+    animation-delay: 1.5s;
+  }
+  
+  .pulse-ring-3 {
+    width: 120px;
+    height: 120px;
+    top: 20%;
+    left: 75%;
+    animation-delay: 3s;
+  }
+  
+  @keyframes pulse-ring-animation {
+    0% {
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(3);
+      opacity: 0;
+    }
+  }

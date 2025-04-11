@@ -159,11 +159,11 @@ const Results = ({ history }) => {
               <div className="inline-flex items-center gap-6 bg-gray-800/50 backdrop-blur-sm py-3 px-6 rounded-xl border border-gray-700/40">
                 <span className="flex items-center gap-2 text-sm font-medium text-gray-300">
                   <div className="w-3 h-3 bg-green-500 rounded-full" />
-                  Normal (0.00-0.50)
+                  Normal (0.00)
                 </span>
                 <span className="flex items-center gap-2 text-sm font-medium text-gray-300">
                   <div className="w-3 h-3 bg-red-500 rounded-full" />
-                  Depressed (0.51-1.00)
+                  Depressed (1.00)
                 </span>
               </div>
               
@@ -314,7 +314,7 @@ const Results = ({ history }) => {
                               }`}
                             >
                               <div className="flex items-center justify-between mb-2">
-                                <span className="text-gray-300">{metric.title || "Prediction Score"}</span>
+                                <span className="text-gray-300">{metric.title || "Prediction"}</span>
                                 <span 
                                   className={`font-semibold text-lg ${
                                     metric.status === "Depressed" ? "text-red-400" : "text-green-400"
@@ -590,7 +590,7 @@ const Results = ({ history }) => {
                                               >
                                                 <div className="flex items-center justify-between mb-2">
                                                   <span className="text-gray-300 text-sm">
-                                                    Prediction {index + 1}
+                                                    Prediction 
                                                   </span>
                                                   <span
                                                     className={`text-lg font-medium ${

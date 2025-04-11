@@ -3,73 +3,74 @@ import { useEffect, useRef, useState } from "react";
 import UploadEEG from "./UploadEEG";
 import ParticleRing from "./ParticleRing";
 import CircularText from "./CircularText";
+import '../css/eeg.css'
 
 // Image data for the grid
 const squareData = [
   {
     id: 1,
-    src: "https://images.unsplash.com/photo-1553002401-c0945c2ff0b0?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "1.jpeg",
   },
   {
     id: 2,
-    src: "https://images.unsplash.com/reserve/dPfjQTyJSJ2LpM7D9Yr0_Photo%2015-02-2014.jpg?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "2.jpeg",
   },
   {
     id: 3,
-    src: "https://images.unsplash.com/photo-1601363645678-0cbae97abb2c?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "3.jpeg",
   },
   {
     id: 4,
-    src: "https://images.unsplash.com/photo-1557426575-6e9ea75ef57a?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "4.jpeg",
   },
   {
     id: 5,
-    src: "https://images.unsplash.com/photo-1552081845-de328afbf66d?q=80&w=1906&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "5.jpeg",
   },
   {
     id: 6,
-    src: "https://images.unsplash.com/photo-1531260796528-ae45a644fb20?q=80&w=1933&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "6.jpeg",
   },
   {
     id: 7,
-    src: "https://images.unsplash.com/photo-1609110995302-572b9641c0d1?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "2.jpeg",
   },
   {
     id: 8,
-    src: "https://plus.unsplash.com/premium_photo-1661627668944-a65d4f54ab27?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "8.jpeg",
   },
-  { 
+  {
     id: 9,
-    src: "https://images.unsplash.com/photo-1620330400227-a051f6af31cb?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "9.jpeg",
   },
   {
     id: 10,
-    src: "https://images.unsplash.com/photo-1617791160536-598cf32026fb?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "10.jpeg",
   },
   {
-    id: 11,
-    src: "https://plus.unsplash.com/premium_photo-1661310066866-45a714706cdc?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    id: 1,
+    src: "11.jpeg",
   },
   {
     id: 12,
-    src: "https://images.unsplash.com/photo-1586473219010-2ffc57b0d282?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "12.jpeg",
   },
   {
     id: 13,
-    src: "https://images.unsplash.com/photo-1530973428-5bf2db2e4d71?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "13.jpeg",
   },
   {
     id: 14,
-    src: "https://images.unsplash.com/photo-1715866170788-cbde4a47a742?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "14.jpeg",
   },
   {
     id: 15,
-    src: "https://plus.unsplash.com/premium_photo-1729867698245-c14c57fc7f47?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "15.jpeg",
   },
   {
     id: 16,
-    src: "https://images.unsplash.com/photo-1607827448452-6fda561309d0?q=80&w=2053&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
+    src: "16.jpeg",
+  }
 ];
 
 // Simple shuffle function for the array
@@ -80,6 +81,54 @@ const shuffle = (array) => {
     [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
   }
   return newArray;
+};
+
+// EEG Wave Animation Component
+const EEGAnimation = () => {
+  return (
+    <>
+      {/* EEG Wave Animation */}
+      <div className="eeg-animation-container">
+        <div className="eeg-wave eeg-wave-1"></div>
+        <div className="eeg-wave eeg-wave-2"></div>
+        <div className="eeg-wave eeg-wave-3"></div>
+        <div className="eeg-wave eeg-wave-4"></div>
+        <div className="eeg-wave eeg-wave-5"></div>
+      </div>
+      
+      {/* EEG Signal Spikes */}
+      <div className="eeg-spike-container">
+        <div className="eeg-spike eeg-spike-1">
+          <div className="eeg-spike-line"></div>
+          <div className="eeg-spike-dot eeg-spike-dot-1"></div>
+          <div className="eeg-spike-dot eeg-spike-dot-2"></div>
+          <div className="eeg-spike-dot eeg-spike-dot-3"></div>
+        </div>
+        <div className="eeg-spike eeg-spike-2">
+          <div className="eeg-spike-line"></div>
+          <div className="eeg-spike-dot eeg-spike-dot-1"></div>
+          <div className="eeg-spike-dot eeg-spike-dot-2"></div>
+          <div className="eeg-spike-dot eeg-spike-dot-3"></div>
+        </div>
+        <div className="eeg-spike eeg-spike-3">
+          <div className="eeg-spike-line"></div>
+          <div className="eeg-spike-dot eeg-spike-dot-1"></div>
+          <div className="eeg-spike-dot eeg-spike-dot-2"></div>
+          <div className="eeg-spike-dot eeg-spike-dot-3"></div>
+        </div>
+      </div>
+      
+      {/* Brain Mapping Grid */}
+      <div className="brain-mapping-grid"></div>
+      
+      {/* Pulse Rings */}
+      <div className="pulse-ring-container">
+        <div className="pulse-ring pulse-ring-1"></div>
+        <div className="pulse-ring pulse-ring-2"></div>
+        <div className="pulse-ring pulse-ring-3"></div>
+      </div>
+    </>
+  );
 };
 
 const Hero = () => {
@@ -110,10 +159,8 @@ const Hero = () => {
   
   return (
     <section className="relative w-full min-h-screen overflow-hidden bg-gray-900 flex flex-col md:flex-row items-center justify-center px-6 md:px-12 py-16 md:py-0">
-      {/* Animated particles */}
-      {/* <div className="absolute inset-0 z-0">
-        <ParticleRing />
-      </div> */}
+      {/* EEG Animation Background */}
+      <EEGAnimation />
       
       {/* Background elements */}
       <div className="absolute inset-0 z-0">
@@ -138,15 +185,6 @@ const Hero = () => {
           }}
         ></div>
       </div>
-      
-      {/* Circular rotating text */}
-      {/* <div className="absolute top-8 left-8 z-10 hidden md:block">
-        <CircularText
-          text="NEURO*CARE*"
-          onHover="speedUp"
-          spinDuration={20}
-        />
-      </div> */}
       
       {/* Content container - with subtle parallax effect */}
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-12 md:gap-6 z-10">
@@ -218,16 +256,6 @@ const Hero = () => {
                 <UploadEEG />
               </div>
             </motion.div>
-            
-            {/* Secondary button */}
-            <motion.a
-              href="#learn-more"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="py-3 px-6 rounded-lg bg-gray-800/70 backdrop-blur-sm text-gray-200 border border-gray-700 hover:border-indigo-500/50 transition-all"
-            >
-              Learn More
-            </motion.a>
           </motion.div>
           
           {/* Stats with enhanced styling */}
@@ -240,7 +268,6 @@ const Hero = () => {
             {[
               { value: "98%", label: "Accuracy" },
               { value: "2.5s", label: "Analysis Time" },
-              { value: "25+", label: "Research Papers" }
             ].map((stat, index) => (
               <motion.div 
                 key={index} 
