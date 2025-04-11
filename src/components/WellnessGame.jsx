@@ -30,8 +30,9 @@ const WellnessGame = ({ isActive = false, onClose }) => {
   };
 
   return (
+    // make a div which have child at center of screen
     <motion.div 
-      className="bg-gradient-to-b mt-2 from-indigo-900/90 to-gray-900/95 rounded-xl shadow-2xl overflow-hidden backdrop-blur-md"
+      className="bg-gradient-to-b w-screen h-screen from-indigo-900/90 to-gray-900/95 md:rounded-xl shadow-2xl overflow-hidden backdrop-blur-md"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
