@@ -12,6 +12,8 @@ export const NavbarDrawer = () => {
   const [showNavigateButton, setShowNavigateButton] = useState(true);
   const [activeTab, setActiveTab] = useState("navbar"); // navbar or wellness
   const location = useLocation();
+  const clickTimeoutRef = useRef(null); // To prevent double-click issue
+  const isClickProcessingRef = useRef(false); // Flag to track if click is being processed
   
   // Reset tab when path changes
   useEffect(() => {
@@ -45,6 +47,29 @@ export const NavbarDrawer = () => {
       setActiveTab("wellness");
     }
   }, [open, location.pathname]);
+  
+  // Clean up click timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (clickTimeoutRef.current) {
+        clearTimeout(clickTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  // Safe handler for opening drawer with debounce
+  const handleOpenDrawer = () => {
+    if (isClickProcessingRef.current) return; // Prevent double processing
+    
+    isClickProcessingRef.current = true;
+    setOpen(true);
+    setShowNavigateButton(false);
+    
+    // Reset processing flag after a delay
+    clickTimeoutRef.current = setTimeout(() => {
+      isClickProcessingRef.current = false;
+    }, 300); // 300ms debounce
+  };
 
   // Context value for sharing drawer state
   const contextValue = {
@@ -65,19 +90,14 @@ export const NavbarDrawer = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-indigo-600 text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap shadow-lg"
+                className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap shadow-lg"
               >
-                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-indigo-600"></div>
+                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-gray-700"></div>
                 Click to navigate
               </motion.div>
             )}
           </AnimatePresence>
-          <SpotlightNavigateButton
-            onClick={() => {
-              setOpen(true);
-              setShowNavigateButton(false);
-            }}
-          />
+          <SpotlightNavigateButton onClick={handleOpenDrawer} />
         </div>
       )}
       <BottomNavbarDrawer
@@ -171,8 +191,8 @@ const SpotlightNavigateButton = ({ onClick }) => {
       whileTap={{ scale: 0.95 }}
       ref={btnRef}
       onClick={onClick}
-      className={`relative overflow-hidden rounded-full bg-gradient-to-r from-indigo-700 to-purple-700 px-6 py-3 text-md font-medium text-white shadow-lg transition-all duration-300 ${
-        active || animateAttention ? "shadow-indigo-500/30" : "filter md:blur-sm opacity-80" 
+      className={`relative overflow-hidden rounded-full bg-gradient-to-r from-gray-700 to-gray-800 px-6 py-3 text-md font-medium text-white shadow-lg transition-all duration-300 ${
+        active || animateAttention ? "shadow-gray-500/30" : "filter md:blur-sm opacity-80" 
       }`}
       animate={animateAttention ? {
         y: [0, -15, 0],
@@ -316,7 +336,7 @@ const BottomNavbarDrawer = ({ open, setOpen, children, activeTab, setActiveTab }
               damping: 30,
               stiffness: 300
             }}
-            className="absolute bottom-0 left-0 right-0 rounded-t-2xl bg-gradient-to-b from-gray-900 to-gray-950 border-t border-indigo-500/20"
+            className="absolute bottom-0 left-0 right-0 rounded-t-2xl bg-gradient-to-b from-gray-900 to-gray-950 border-t border-gray-500/20"
             style={{ y }}
             drag="y"
             dragControls={controls}
@@ -358,7 +378,7 @@ const BottomNavbarDrawer = ({ open, setOpen, children, activeTab, setActiveTab }
               {/* Drag handle */}
               <button
                 onPointerDown={(e) => controls.start(e)}
-                className="h-1.5 w-16 cursor-grab touch-none rounded-full bg-indigo-400/30 mt-2 mb-1 active:cursor-grabbing"
+                className="h-1.5 w-16 cursor-grab touch-none rounded-full bg-gray-400/30 mt-2 mb-1 active:cursor-grabbing"
               ></button>
             </div>
             

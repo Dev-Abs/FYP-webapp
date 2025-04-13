@@ -226,7 +226,7 @@ const NeuroCareInteractive = () => {
           transition={{ delay: 0.5, type: "spring" }}
         >
           <FaComments size={20} />
-          <span className="font-medium">Talk to our Assistant</span>
+          <span className="font-medium">Talk to our AI Assistant</span>
         </motion.button>
         
         <AnimatePresence>

@@ -7,7 +7,11 @@ import CircularText from "./CircularText";
 import Chatbot from "./Chatbot";
 import ElectrodeSelector from "./ElectrodeSelector";
 import ElectrodeAnimation from "./ElectrodeAnimation";
+import NeuroBrainBackground from "./NeuroBrainBackground";
+import ProfessionalElements from "./ProfessionalElements";
+import "../css/neurostyles.css"; // Import the new styles
 
+// Main UploadPage component with enhanced professional background
 export default function UploadPage({ addToHistory }) {
   const [file, setFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState("");
@@ -143,20 +147,10 @@ export default function UploadPage({ addToHistory }) {
       };
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      {/* Background Video with Overlay Gradient */}
-      <div className="absolute inset-0 z-[-1]">
-        <video
-          autoPlay
-          muted
-          loop
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="bg-fyp.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-tr from-gray-900 via-gray-900/85 to-blue-900/50"></div>
-      </div>
+    <div className="relative bg-gray-900 min-h-screen overflow-hidden">
+      {/* New background components */}
+      <NeuroBrainBackground />
+      <ProfessionalElements />
 
       <NavbarDrawer />
       <Chatbot />
@@ -169,7 +163,7 @@ export default function UploadPage({ addToHistory }) {
         Left="-30px"
       />
 
-      <div className="min-h-screen flex items-center justify-center py-8 px-4 md:flex-row flex-col z-10">
+      <div className="min-h-screen flex items-center justify-center py-8 px-4 md:flex-row flex-col z-10 relative">
         <motion.div
           className="text-center mb-8 md:mb-0 md:mr-10 md:w-1/3"
           initial={{ opacity: 0, y: 30 }}
@@ -213,9 +207,9 @@ export default function UploadPage({ addToHistory }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <div className="bg-gray-800/30 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden border border-gray-700">
+          <div className="bg-gray-800/30 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden border border-gray-700 hover:border-indigo-600/50 transition-all duration-500">
             <div className="p-1 bg-gradient-to-r from-indigo-500 via-blue-500 to-purple-500">
-              <div className="bg-gray-900 p-6 rounded-t-xl">
+              <div className="bg-gray-900/80 backdrop-blur-sm p-6 rounded-t-xl">
                 <h2 className="text-2xl font-semibold text-gray-100 mb-2 flex items-center">
                   <svg
                     className="w-6 h-6 mr-2 text-indigo-400"
@@ -241,7 +235,7 @@ export default function UploadPage({ addToHistory }) {
 
             <div className="p-6">
               <div
-                className="border-2 border-dashed border-gray-700 rounded-xl p-8 flex flex-col items-center justify-center transition-all hover:border-indigo-500 hover:bg-gray-800/30 cursor-pointer group"
+                className="border-2 border-dashed border-gray-700 rounded-xl p-8 flex flex-col items-center justify-center transition-all hover:border-indigo-500 hover:bg-gray-800/50 cursor-pointer group backdrop-blur-md"
                 onClick={() => document.getElementById("file-upload").click()}
               >
                 <input
@@ -277,7 +271,7 @@ export default function UploadPage({ addToHistory }) {
 
               {file && (
                 <motion.div
-                  className="mt-6 bg-gray-800/40 p-4 rounded-lg border border-gray-700"
+                  className="mt-6 bg-gray-800/40 backdrop-blur-md p-4 rounded-lg border border-gray-700 hover:border-indigo-600/70 transition-all"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
@@ -328,7 +322,7 @@ export default function UploadPage({ addToHistory }) {
                       onClick={() =>
                         document.getElementById("file-upload").click()
                       }
-                      className="text-xs text-indigo-400 hover:text-indigo-300 border border-indigo-800 px-2 py-1 rounded hover:bg-indigo-900/30 transition-colors"
+                      className="text-xs text-indigo-400 hover:text-indigo-300 border border-indigo-800 px-2 py-1 rounded hover:bg-indigo-900/50 hover:shadow-indigo-900/30 hover:shadow-md transition-all"
                     >
                       Replace
                     </button>
@@ -345,7 +339,7 @@ export default function UploadPage({ addToHistory }) {
                       </span>
                       <button
                         onClick={() => setShowElectrodeSelector(true)}
-                        className="text-indigo-400 hover:text-indigo-300 text-xs border border-indigo-800 px-2 py-1 rounded hover:bg-indigo-900/30 transition-colors flex items-center"
+                        className="text-indigo-400 hover:text-indigo-300 text-xs border border-indigo-800 px-2 py-1 rounded hover:bg-indigo-900/50 hover:shadow-indigo-900/30 hover:shadow-md transition-all flex items-center"
                       >
                         <svg
                           className="h-3 w-3 mr-1"
@@ -370,13 +364,13 @@ export default function UploadPage({ addToHistory }) {
 
               {uploadStatus && (
                 <motion.div
-                  className={`mt-4 px-4 py-3 rounded-lg ${
+                  className={`mt-4 px-4 py-3 rounded-lg backdrop-blur-md ${
                     uploadStatus.includes("complete")
-                      ? "bg-green-900/20 text-green-400 border border-green-900"
+                      ? "bg-green-900/20 text-green-400 border border-green-900 shadow-green-900/20 shadow-md"
                       : uploadStatus.includes("failed") ||
                         uploadStatus.includes("Error")
-                      ? "bg-red-900/20 text-red-400 border border-red-900"
-                      : "bg-blue-900/20 text-blue-400 border border-blue-900"
+                      ? "bg-red-900/20 text-red-400 border border-red-900 shadow-red-900/20 shadow-md"
+                      : "bg-blue-900/20 text-blue-400 border border-blue-900 shadow-blue-900/20 shadow-md"
                   } flex items-center`}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -422,7 +416,7 @@ export default function UploadPage({ addToHistory }) {
                 className={`mt-6 w-full py-3 rounded-lg text-white font-medium relative overflow-hidden group ${
                   !file
                     ? "bg-gray-700 cursor-not-allowed"
-                    : "bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 shadow-lg"
+                    : "bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 shadow-lg hover:shadow-indigo-900/50 transition-all duration-300"
                 }`}
               >
                 <span className="relative z-10 flex items-center justify-center">
@@ -430,26 +424,6 @@ export default function UploadPage({ addToHistory }) {
                     "Select a file to continue"
                   ) : progress < 100 ? (
                     <>
-                      {/* <svg
-                        className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        ></circle>
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        ></path>
-                      </svg> */}
                       Analyze EEG Data
                     </>
                   ) : (
@@ -476,7 +450,7 @@ export default function UploadPage({ addToHistory }) {
               </button>
 
               {progress > 0 && (
-                <div className="w-full h-1 bg-gray-700 rounded-full mt-4 overflow-hidden">
+                <div className="w-full h-1 bg-gray-700/50 backdrop-blur-sm rounded-full mt-4 overflow-hidden shadow-inner">
                   <motion.div
                     className="h-full bg-gradient-to-r from-indigo-500 to-blue-500"
                     initial={{ width: 0 }}
@@ -497,7 +471,7 @@ export default function UploadPage({ addToHistory }) {
       <AnimatePresence>
         {showElectrodeAnimation && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-md"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -530,13 +504,13 @@ export default function UploadPage({ addToHistory }) {
       <AnimatePresence>
         {showPopup && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 backdrop-blur-md"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="bg-gray-900/80 backdrop-blur-md rounded-2xl p-8 w-11/12 md:w-1/2 max-w-xl border border-gray-700 shadow-xl relative overflow-hidden"
+              className="bg-gray-900/80 backdrop-blur-xl rounded-2xl p-8 w-11/12 md:w-1/2 max-w-xl border border-gray-700 shadow-2xl shadow-indigo-900/20 relative overflow-hidden"
               initial={{ scale: 0.9, y: -30 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: -30 }}
