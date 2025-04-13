@@ -254,7 +254,7 @@ const Results = ({ history }) => {
                     </h3>
                     <SelectedElectrodesDisplay
                       selectedElectrodes={latestElectrodes}
-                      enhancedDisplay={true}
+                      enhancedDisplay={false}
                     />
                   </div>
                 </motion.div>

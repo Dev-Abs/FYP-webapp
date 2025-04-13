@@ -29,8 +29,8 @@ const ProfessionalElements = () => {
 
     // Position blocks at different corners/sides
     const positions = [
-      { top: '20%', left: '10px' },
-      { top: '20%', right: '10px' },
+      { top: '10%', left: '10px' },
+      { top: '10%', right: '10px' },
       { bottom: '15%', left: '10px' },
       { bottom: '15%', right: '10px' }
     ];

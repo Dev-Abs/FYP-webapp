@@ -70,95 +70,103 @@ const NeuroCareInteractive = () => {
   }, [isDragging]);
 
   return (
-    <div className="relative overflow-hidden min-h-screen bg-gray-950" ref={constraintsRef}>
+    <div className="relative overflow-hidden min-h-screen bg-gradient-to-b from-gray-900 to-gray-950" ref={constraintsRef}>
       <NavbarDrawer />
       
-      {/* Enhanced circular text with glowing effect */}
-      <div className="absolute top-4 left-4 z-20">
+      {/* Subtle circular text */}
+      {/* <div className="absolute top-4 left-4 z-20">
         <CircularText
           text="NEURO*CARE*"
           onHover="speedUp"
-          spinDuration={15}
-          className="filter drop-shadow-lg text-indigo-200"
+          spinDuration={20}
+          className="text-gray-400"
         />
-      </div>
+      </div> */}
       
-      {/* Improved background with darker mesh gradient and animated particles */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-br from-gray-950 via-indigo-950 to-gray-950 overflow-hidden">
-        {/* Mesh gradient overlay */}
-        <div className="absolute inset-0 opacity-25 bg-[radial-gradient(circle_at_20%_30%,rgba(78,48,178,0.7)_0%,rgba(10,15,30,0)_60%)]"></div>
-        <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_80%_70%,rgba(120,58,180,0.6)_0%,rgba(10,15,30,0)_60%)]"></div>
+      {/* Subtle background with grid pattern */}
+      <div className="absolute inset-0 z-0">
+        {/* Grid pattern */}
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(99,102,241,0.075)_1px,transparent_1px)] bg-[size:20px_20px] opacity-30"></div>
         
-        {/* Enhanced particle animation */}
-        <div className="particles-container">
-          {Array.from({ length: 80 }).map((_, i) => (
-            <div 
-              key={i} 
-              className="particle"
-              style={{
-                '--size': `${Math.random() * 12 + 2}px`,
-                '--pos-x': `${Math.random() * 100}%`,
-                '--pos-y': `${Math.random() * 100}%`,
-                '--opacity': Math.random() * 0.5 + 0.15,
-                '--delay': `${Math.random() * 8}s`,
-                '--duration': `${Math.random() * 30 + 15}s`,
-                '--blur': `${Math.random() * 2 + 1}px`,
-              }}
-            ></div>
-          ))}
+        {/* Subtle gradient accents */}
+        <div className="absolute top-0 -right-1/3 w-2/3 h-2/3 bg-indigo-900/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 -left-1/3 w-2/3 h-2/3 bg-indigo-900/5 rounded-full blur-3xl"></div>
+        
+        {/* Refined neural network visualization */}
+        <div className="absolute inset-0 overflow-hidden opacity-10">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="rgba(99, 102, 241, 0.3)" />
+                <stop offset="100%" stopColor="rgba(67, 56, 202, 0.3)" />
+              </linearGradient>
+            </defs>
+            
+            {/* Horizontal lines */}
+            <line x1="0%" y1="20%" x2="100%" y2="20%" stroke="url(#line-gradient)" strokeWidth="0.5" />
+            <line x1="0%" y1="40%" x2="100%" y2="40%" stroke="url(#line-gradient)" strokeWidth="0.5" />
+            <line x1="0%" y1="60%" x2="100%" y2="60%" stroke="url(#line-gradient)" strokeWidth="0.5" />
+            <line x1="0%" y1="80%" x2="100%" y2="80%" stroke="url(#line-gradient)" strokeWidth="0.5" />
+            
+            {/* Vertical lines */}
+            <line x1="20%" y1="0%" x2="20%" y2="100%" stroke="url(#line-gradient)" strokeWidth="0.5" />
+            <line x1="40%" y1="0%" x2="40%" y2="100%" stroke="url(#line-gradient)" strokeWidth="0.5" />
+            <line x1="60%" y1="0%" x2="60%" y2="100%" stroke="url(#line-gradient)" strokeWidth="0.5" />
+            <line x1="80%" y1="0%" x2="80%" y2="100%" stroke="url(#line-gradient)" strokeWidth="0.5" />
+            
+            {/* Node points */}
+            <circle cx="20%" cy="20%" r="2" fill="rgba(99, 102, 241, 0.8)" />
+            <circle cx="20%" cy="40%" r="2" fill="rgba(99, 102, 241, 0.8)" />
+            <circle cx="20%" cy="60%" r="2" fill="rgba(99, 102, 241, 0.8)" />
+            <circle cx="20%" cy="80%" r="2" fill="rgba(99, 102, 241, 0.8)" />
+            
+            <circle cx="40%" cy="20%" r="2" fill="rgba(99, 102, 241, 0.8)" />
+            <circle cx="40%" cy="40%" r="2" fill="rgba(99, 102, 241, 0.8)" />
+            <circle cx="40%" cy="60%" r="2" fill="rgba(99, 102, 241, 0.8)" />
+            <circle cx="40%" cy="80%" r="2" fill="rgba(99, 102, 241, 0.8)" />
+            
+            <circle cx="60%" cy="20%" r="2" fill="rgba(99, 102, 241, 0.8)" />
+            <circle cx="60%" cy="40%" r="2" fill="rgba(99, 102, 241, 0.8)" />
+            <circle cx="60%" cy="60%" r="2" fill="rgba(99, 102, 241, 0.8)" />
+            <circle cx="60%" cy="80%" r="2" fill="rgba(99, 102, 241, 0.8)" />
+            
+            <circle cx="80%" cy="20%" r="2" fill="rgba(99, 102, 241, 0.8)" />
+            <circle cx="80%" cy="40%" r="2" fill="rgba(99, 102, 241, 0.8)" />
+            <circle cx="80%" cy="60%" r="2" fill="rgba(99, 102, 241, 0.8)" />
+            <circle cx="80%" cy="80%" r="2" fill="rgba(99, 102, 241, 0.8)" />
+            
+            {/* Connection lines */}
+            <line x1="20%" y1="20%" x2="40%" y2="40%" stroke="rgba(99, 102, 241, 0.3)" strokeWidth="0.5" />
+            <line x1="20%" y1="60%" x2="40%" y2="40%" stroke="rgba(99, 102, 241, 0.3)" strokeWidth="0.5" />
+            <line x1="40%" y1="40%" x2="60%" y2="60%" stroke="rgba(99, 102, 241, 0.3)" strokeWidth="0.5" />
+            <line x1="40%" y1="80%" x2="60%" y2="60%" stroke="rgba(99, 102, 241, 0.3)" strokeWidth="0.5" />
+            <line x1="60%" y1="20%" x2="80%" y2="40%" stroke="rgba(99, 102, 241, 0.3)" strokeWidth="0.5" />
+            <line x1="60%" y1="60%" x2="80%" y2="40%" stroke="rgba(99, 102, 241, 0.3)" strokeWidth="0.5" />
+          </svg>
         </div>
-        
-        {/* Subtle dark overlay for depth */}
-        <div className="absolute inset-0 bg-black opacity-20"></div>
       </div>
-
-      {/* Floating brain wave visualization for decorative purposes */}
-      <motion.div 
-        className="absolute top-1/4 right-10 w-48 h-48 opacity-20 z-0 hidden md:block"
-        animate={{
-          y: [0, 20, 0],
-          opacity: [0.15, 0.25, 0.15],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      >
-        <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
-          <motion.path 
-            d="M0 50 C 40 30, 60 70, 100 50 C 140 30, 160 70, 200 50" 
-            stroke="rgba(255,255,255,0.8)" 
-            strokeWidth="2" 
-            fill="none"
-            animate={{
-              d: [
-                "M0 50 C 40 30, 60 70, 100 50 C 140 30, 160 70, 200 50",
-                "M0 50 C 40 70, 60 30, 100 50 C 140 70, 160 30, 200 50",
-                "M0 50 C 40 30, 60 70, 100 50 C 140 30, 160 70, 200 50"
-              ]
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-        </svg>
-      </motion.div>
 
       {/* Content Tabs */}
       <div className="relative z-10 pt-20 pb-10 px-4 flex flex-col items-center justify-center min-h-screen">
-        <div className="w-full max-w-xl mx-auto mb-8">
-          <div className="flex justify-center mb-6">
-            <div className="bg-gray-900/70 backdrop-blur-lg rounded-full p-1 shadow-xl border border-indigo-500/20">
+        <div className="w-full max-w-xl mx-auto mb-10">
+          <motion.h1 
+            className="text-3xl md:text-4xl font-bold text-gray-100 text-center mb-6"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+          You are not Alone!
+          </motion.h1>
+          
+          <div className="flex justify-center mb-10">
+            <div className="bg-gray-800/70 rounded-full p-1 border border-gray-700 shadow-md">
               <div className="flex space-x-1">
                 <button
                   onClick={() => setActiveTab("motivation")}
                   className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                     activeTab === "motivation"
-                      ? "bg-gradient-to-r from-indigo-700 to-purple-700 text-white shadow-lg"
-                      : "text-indigo-100 hover:bg-gray-800/80"
+                      ? "bg-indigo-600 text-white shadow-sm"
+                      : "text-gray-300 hover:bg-gray-700/80"
                   }`}
                 >
                   Motivation
@@ -167,8 +175,8 @@ const NeuroCareInteractive = () => {
                   onClick={() => setActiveTab("affirmations")}
                   className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                     activeTab === "affirmations"
-                      ? "bg-gradient-to-r from-indigo-700 to-purple-700 text-white shadow-lg"
-                      : "text-indigo-100 hover:bg-gray-800/80"
+                      ? "bg-indigo-600 text-white shadow-sm"
+                      : "text-gray-300 hover:bg-gray-700/80"
                   }`}
                 >
                   Affirmations
@@ -182,11 +190,11 @@ const NeuroCareInteractive = () => {
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="w-full"
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.4 }}
+            className="w-full mb-20"
           >
             {activeTab === "motivation" ? (
               <NeuroCareRotatingStatements />
@@ -195,17 +203,17 @@ const NeuroCareInteractive = () => {
                 {motivationalWords.map((word, index) => (
                   <motion.div
                     key={word}
-                    initial={{ opacity: 0, scale: 0.8 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.05, duration: 0.4 }}
-                    className="px-5 py-3 bg-gray-800/60 backdrop-blur-md rounded-xl border border-indigo-500/30 shadow-xl"
+                    transition={{ delay: index * 0.03, duration: 0.3 }}
+                    className="px-5 py-3 bg-gray-800/80 rounded-lg border border-gray-700 hover:border-indigo-500/50 shadow-md transition-all duration-300"
                     whileHover={{ 
-                      scale: 1.05, 
-                      backgroundColor: "rgba(79, 70, 229, 0.2)",
-                      boxShadow: "0 0 15px rgba(79, 70, 229, 0.3)"
+                      scale: 1.03, 
+                      backgroundColor: "rgba(67, 56, 202, 0.1)",
+                      borderColor: "rgba(99, 102, 241, 0.5)"
                     }}
                   >
-                    <p className="text-indigo-100 font-medium">{word}</p>
+                    <p className="text-gray-200 font-medium">{word}</p>
                   </motion.div>
                 ))}
               </div>
@@ -214,39 +222,39 @@ const NeuroCareInteractive = () => {
         </AnimatePresence>
       </div>
 
-      {/* Enhanced floating action button */}
+      {/* Refined floating action button */}
       <div className="fixed bottom-8 right-8 z-50">
         <motion.button
           onClick={() => setShowChatbot(true)}
-          whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(79, 70, 229, 0.4)" }}
-          whileTap={{ scale: 0.95 }}
-          className="px-6 py-3 bg-gradient-to-r from-indigo-700 to-purple-800 text-white rounded-full shadow-xl hidden md:flex items-center space-x-2 border border-indigo-500/30"
-          initial={{ y: 100, opacity: 0 }}
+          whileHover={{ scale: 1.03, boxShadow: "0 4px 8px -2px rgba(0, 0, 0, 0.3)" }}
+          whileTap={{ scale: 0.97 }}
+          className="px-6 py-3 bg-indigo-600 text-white rounded-full shadow-md hidden md:flex items-center space-x-2 border border-indigo-500/50"
+          initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.5, type: "spring" }}
+          transition={{ delay: 0.3, type: "spring", stiffness: 200, damping: 20 }}
         >
-          <FaComments size={20} />
+          <FaComments size={18} />
           <span className="font-medium">Talk to our AI Assistant</span>
         </motion.button>
         
         <AnimatePresence>
           {!showChatbot && (
             <motion.button
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.3 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.2 }}
               onClick={() => setShowChatbot(true)}
-              className="fixed bottom-6 right-6 p-4 bg-gradient-to-r from-indigo-700 to-purple-800 rounded-full shadow-2xl text-white hover:shadow-indigo-500/30 hover:shadow-lg transition-all duration-300 z-50 block md:hidden"
-              whileTap={{ scale: 0.9 }}
-              whileHover={{ scale: 1.1 }}
+              className="fixed bottom-6 right-6 p-4 bg-indigo-600 rounded-full shadow-md text-white border border-indigo-500/50 transition-all duration-300 z-50 block md:hidden"
+              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.05 }}
             >
-              <FaComments size={24} />
+              <FaComments size={20} />
               <motion.span 
-                className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-xs"
+                className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-xs border border-red-400"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                transition={{ delay: 1.5, type: "spring" }}
+                transition={{ delay: 1, type: "spring" }}
               >
                 1
               </motion.span>
@@ -255,11 +263,11 @@ const NeuroCareInteractive = () => {
         </AnimatePresence>
       </div>
 
-      {/* Enhanced Draggable Chatbot */}
+      {/* Refined Draggable Chatbot */}
       <AnimatePresence>
         {showChatbot && (
           <motion.div
-            className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 md:p-6"
+            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 md:p-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -269,19 +277,19 @@ const NeuroCareInteractive = () => {
               dragConstraints={constraintsRef}
               onDragStart={onDragStart}
               onDragEnd={onDragEnd}
-              dragElastic={0.1}
+              dragElastic={0.05}
               dragMomentum={false}
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
-              className="w-full max-w-4xl h-[80vh] max-h-[700px] rounded-2xl overflow-hidden shadow-2xl border border-indigo-500/40"
+              className="w-full max-w-4xl h-[80vh] max-h-[700px] rounded-xl overflow-hidden shadow-lg border border-gray-700"
               style={{ 
                 touchAction: "none",
-                background: "linear-gradient(to bottom, rgba(17, 24, 39, 0.95), rgba(9, 9, 21, 0.98))"
+                background: "linear-gradient(to bottom, rgb(17, 24, 39), rgb(9, 9, 18))"
               }}
             >
-              <div className="w-full h-full backdrop-blur-md">
+              <div className="w-full h-full">
                 <NeuroCareInteractiveChatbot onClose={() => setShowChatbot(false)} />
               </div>
             </motion.div>
@@ -289,70 +297,18 @@ const NeuroCareInteractive = () => {
         )}
       </AnimatePresence>
       
-      {/* Pulsing help indicator in bottom left */}
+      {/* Subtle help indicator in bottom left */}
       <motion.div 
         className="fixed bottom-8 left-8 z-30 hidden md:block"
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2 }}
+        transition={{ delay: 0.8 }}
       >
-        <div className="flex items-center space-x-3 bg-gray-900/60 backdrop-blur-sm px-4 py-2 rounded-full border border-indigo-500/20">
-          <motion.div
-            animate={{ 
-              scale: [1, 1.1, 1],
-              opacity: [0.7, 1, 0.7]
-            }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-3 h-3 bg-green-500 rounded-full shadow-sm shadow-green-500/50"
-          />
-          <p className="text-indigo-100 text-sm font-medium">NeuroCare is here to help</p>
+        <div className="flex items-center space-x-3 bg-gray-800/80 px-4 py-2 rounded-full border border-gray-700">
+          <div className="w-2 h-2 bg-green-500 rounded-full shadow-sm"></div>
+          <p className="text-gray-300 text-sm">NeuroCare is here to help</p>
         </div>
       </motion.div>
-      
-      {/* Custom CSS for enhanced particles */}
-      <style jsx>{`
-        .particles-container {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          overflow: hidden;
-        }
-        
-        .particle {
-          position: absolute;
-          width: var(--size);
-          height: var(--size);
-          background: rgba(255, 255, 255, var(--opacity));
-          border-radius: 50%;
-          top: var(--pos-y);
-          left: var(--pos-x);
-          animation: float var(--duration) linear var(--delay) infinite;
-          filter: blur(var(--blur));
-        }
-        
-        @keyframes float {
-          0% {
-            transform: translateY(0) translateX(0);
-            opacity: var(--opacity);
-          }
-          25% {
-            transform: translateY(-100px) translateX(50px);
-            opacity: var(--opacity) * 0.8;
-          }
-          50% {
-            transform: translateY(-200px) translateX(-50px);
-            opacity: var(--opacity) * 0.6;
-          }
-          75% {
-            transform: translateY(-300px) translateX(25px);
-            opacity: var(--opacity) * 0.3;
-          }
-          100% {
-            transform: translateY(-500px) translateX(0);
-            opacity: 0;
-          }
-        }
-      `}</style>
     </div>
   );
 };
@@ -406,18 +362,18 @@ const FlippingCard = ({ items }) => {
           animate="animate"
           exit="exit"
           transition={{ duration: TRANSITION_DURATION_IN_SECS, ease: "easeInOut" }}
-          className="p-10 bg-gradient-to-br from-gray-900/80 to-indigo-900/40 backdrop-blur-lg rounded-2xl shadow-2xl text-center border border-indigo-500/30"
+          className="p-8 bg-gray-800/80 rounded-xl shadow-lg text-center border border-gray-700"
           style={{ transformStyle: "preserve-3d" }}
         >
           <motion.div
             className="mb-4"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 0.8 }}
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 0.7 }}
             transition={{ delay: 0.2 }}
           >
-            <FaHeartbeat className="w-8 h-8 mx-auto text-indigo-400" />
+            <FaHeartbeat className="w-7 h-7 mx-auto text-indigo-400" />
           </motion.div>
-          <p className="text-2xl md:text-3xl font-semibold text-indigo-50 leading-relaxed">
+          <p className="text-xl md:text-2xl font-medium text-gray-100 leading-relaxed">
             {items[index]}
           </p>
         </motion.div>

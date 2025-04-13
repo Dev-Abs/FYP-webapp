@@ -154,14 +154,14 @@ export default function UploadPage({ addToHistory }) {
 
       <NavbarDrawer />
       <Chatbot />
-      <CircularText
+      {/* <CircularText
         text="NEURO*CARE*"
         onHover="speedUp"
         spinDuration={20}
         className="custom-class"
         Top="4"
         Left="-30px"
-      />
+      /> */}
 
       <div className="min-h-screen flex items-center justify-center py-8 px-4 md:flex-row flex-col z-10 relative">
         <motion.div
